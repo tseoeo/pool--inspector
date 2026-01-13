@@ -1,0 +1,371 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================
+// JURISDICTION & SOURCE MANAGEMENT
+// ============================================
+
+model Jurisdiction {
+  id        String           @id @default(cuid())
+  slug      String           @unique
+  name      String
+  state     String
+  type      JurisdictionType
+  timezone  String           @default("America/Chicago")
+  website   String?
+
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  sources    Source[]
+  facilities Facility[]
+
+  @@index([state])
+  @@index([slug])
+}
+
+enum JurisdictionType {
+  CITY
+  COUNTY
+  HEALTH_DISTRICT
+  STATE
+}
+
+model Source {
+  id             String      @id @default(cuid())
+  jurisdictionId String
+  jurisdiction   Jurisdiction @relation(fields: [jurisdictionId], references: [id])
+
+  name           String
+  adapterType    AdapterType
+  endpoint       String
+  isActive       Boolean     @default(true)
+
+  config         Json        @default("{}")
+
+  cursor         Json?
+  lastSyncAt     DateTime?
+  lastSyncStatus SyncStatus?
+  lastSyncError  String?
+  lastRecordCount Int?
+
+  requestsPerMinute Int      @default(60)
+
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  rawRecords     RawRecord[]
+  syncLogs       SyncLog[]
+
+  @@index([jurisdictionId])
+  @@index([adapterType])
+  @@index([isActive])
+}
+
+enum AdapterType {
+  SOCRATA
+  ARCGIS
+  CSV
+  MANUAL
+}
+
+enum SyncStatus {
+  SUCCESS
+  PARTIAL
+  FAILED
+}
+
+// ============================================
+// FACILITY MANAGEMENT
+// ============================================
+
+model Facility {
+  id             String         @id @default(cuid())
+  jurisdictionId String
+  jurisdiction   Jurisdiction   @relation(fields: [jurisdictionId], references: [id])
+
+  externalIds    Json           @default("[]")
+
+  rawName        String
+  rawAddress     String
+  rawCity        String?
+  rawState       String?
+  rawZip         String?
+
+  normalizedName    String
+  normalizedAddress String
+
+  displayName    String
+  displayAddress String
+  city           String
+  state          String
+  zipCode        String?
+
+  latitude       Float?
+  longitude      Float?
+
+  facilityType   FacilityType?
+  status         FacilityStatus @default(ACTIVE)
+
+  slug           String         @unique
+
+  lastInspectionDate   DateTime?
+  lastInspectionResult String?
+  totalInspections     Int        @default(0)
+
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  inspections    InspectionEvent[]
+
+  @@unique([jurisdictionId, normalizedName, normalizedAddress])
+  @@index([jurisdictionId])
+  @@index([normalizedName])
+  @@index([normalizedAddress])
+  @@index([status])
+  @@index([lastInspectionDate])
+  @@index([latitude, longitude])
+  @@index([slug])
+  @@index([city, state])
+}
+
+enum FacilityType {
+  PUBLIC_POOL
+  PRIVATE_POOL
+  SPA
+  HOT_TUB
+  SPLASH_PAD
+  WADING_POOL
+  WATERPARK
+  UNKNOWN
+}
+
+enum FacilityStatus {
+  ACTIVE
+  CLOSED_PERMANENT
+  CLOSED_TEMPORARY
+  UNKNOWN
+}
+
+// ============================================
+// INSPECTION EVENTS
+// ============================================
+
+model InspectionEvent {
+  id             String          @id @default(cuid())
+  facilityId     String
+  facility       Facility        @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+
+  rawRecordId    String?         @unique
+  rawRecord      RawRecord?      @relation(fields: [rawRecordId], references: [id])
+
+  inspectionDate DateTime        @db.Timestamptz(6)
+
+  rawInspectionType String?
+  rawResult         String?
+  rawScore          String?
+
+  inspectionType    InspectionType?
+  result            InspectionResult?
+  score             Int?
+  demerits          Int?
+
+  isPassing         Boolean?
+  isClosure         Boolean       @default(false)
+
+  inspectorName     String?
+  inspectorId       String?
+
+  notes             String?
+  followUpRequired  Boolean       @default(false)
+  followUpDate      DateTime?     @db.Timestamptz(6)
+
+  sourceUrl         String?
+  reportUrl         String?
+
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  violations        Violation[]
+  attachments       Attachment[]
+
+  @@index([facilityId])
+  @@index([inspectionDate])
+  @@index([result])
+  @@index([isClosure])
+  @@index([facilityId, inspectionDate])
+}
+
+enum InspectionType {
+  ROUTINE
+  FOLLOW_UP
+  COMPLAINT
+  OPENING
+  CLOSING
+  REINSPECTION
+  OTHER
+}
+
+enum InspectionResult {
+  PASS
+  FAIL
+  CONDITIONAL_PASS
+  CLOSED
+  NOT_INSPECTED
+  PENDING
+  OTHER
+}
+
+// ============================================
+// VIOLATIONS
+// ============================================
+
+model Violation {
+  id            String           @id @default(cuid())
+  inspectionId  String
+  inspection    InspectionEvent  @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+
+  rawCode       String?
+  rawDescription String
+
+  code          String?
+  category      ViolationCategory?
+  description   String
+
+  severity      ViolationSeverity?
+  isCritical    Boolean          @default(false)
+
+  correctedAt   DateTime?        @db.Timestamptz(6)
+  correctionNotes String?
+
+  createdAt     DateTime         @default(now())
+
+  @@index([inspectionId])
+  @@index([category])
+  @@index([severity])
+  @@index([isCritical])
+}
+
+enum ViolationCategory {
+  WATER_QUALITY
+  SAFETY_EQUIPMENT
+  STRUCTURAL
+  SANITATION
+  DOCUMENTATION
+  SIGNAGE
+  MECHANICAL
+  OTHER
+}
+
+enum ViolationSeverity {
+  CRITICAL
+  MAJOR
+  MINOR
+  OBSERVATION
+}
+
+// ============================================
+// ATTACHMENTS
+// ============================================
+
+model Attachment {
+  id            String          @id @default(cuid())
+  inspectionId  String
+  inspection    InspectionEvent @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+
+  type          AttachmentType
+  filename      String
+  mimeType      String
+  sizeBytes     Int
+  url           String
+
+  extractedText String?
+
+  createdAt     DateTime        @default(now())
+
+  @@index([inspectionId])
+  @@index([type])
+}
+
+enum AttachmentType {
+  INSPECTION_REPORT
+  PHOTO
+  CERTIFICATE
+  PERMIT
+  OTHER
+}
+
+// ============================================
+// RAW DATA LAKE
+// ============================================
+
+model RawRecord {
+  id              String     @id @default(cuid())
+  sourceId        String
+  source          Source     @relation(fields: [sourceId], references: [id])
+
+  externalId      String
+
+  payload         Json
+
+  payloadHash     String
+
+  processedAt     DateTime?  @db.Timestamptz(6)
+  processingError String?
+
+  schemaVersion   Int        @default(1)
+
+  fetchedAt       DateTime   @default(now()) @db.Timestamptz(6)
+
+  inspection      InspectionEvent?
+
+  @@unique([sourceId, externalId])
+  @@index([sourceId])
+  @@index([processedAt])
+  @@index([fetchedAt])
+  @@index([payloadHash])
+}
+
+// ============================================
+// SYNC LOGGING
+// ============================================
+
+model SyncLog {
+  id             String     @id @default(cuid())
+  sourceId       String
+  source         Source     @relation(fields: [sourceId], references: [id])
+
+  syncType       SyncType
+  status         SyncStatus
+
+  startedAt      DateTime   @default(now()) @db.Timestamptz(6)
+  completedAt    DateTime?  @db.Timestamptz(6)
+
+  recordsFetched Int        @default(0)
+  recordsCreated Int        @default(0)
+  recordsUpdated Int        @default(0)
+  recordsSkipped Int        @default(0)
+  recordsFailed  Int        @default(0)
+
+  cursorBefore   Json?
+  cursorAfter    Json?
+
+  errorMessage   String?
+  errorStack     String?
+
+  @@index([sourceId])
+  @@index([syncType])
+  @@index([status])
+  @@index([startedAt])
+}
+
+enum SyncType {
+  BACKFILL
+  INCREMENTAL
+  MANUAL
+}
