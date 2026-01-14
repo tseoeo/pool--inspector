@@ -11,6 +11,9 @@ const pool =
   globalForPrisma.pool ??
   new Pool({
     connectionString: process.env.DATABASE_URL,
+    max: 10, // Limit connection pool size
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 10000,
   });
 
 const adapter = new PrismaPg(pool);
