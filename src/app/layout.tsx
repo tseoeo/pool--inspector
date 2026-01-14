@@ -49,6 +49,12 @@ export default function RootLayout({
               >
                 Closures
               </Link>
+              <Link
+                href="/coverage"
+                className="text-sm text-[var(--foreground-secondary)] hover:text-[var(--foreground)] transition-colors duration-150"
+              >
+                Coverage
+              </Link>
             </div>
           </nav>
         </header>
