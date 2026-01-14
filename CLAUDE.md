@@ -2,6 +2,8 @@
 
 > **Note:** Keep this file updated when making significant changes to the project structure, adding new features, or modifying deployment configuration.
 
+> **For collaboration guidelines, see [CONTRIBUTING.md](./CONTRIBUTING.md)**
+
 ## Overview
 
 Pool Inspection Index aggregates public pool and spa inspection records from municipal health departments across the United States. Data is sourced from official government APIs (Socrata, ArcGIS) and updated daily.
@@ -111,6 +113,10 @@ npm run ingest:daily     # Run incremental daily sync
 ## Deployment (Railway)
 
 The project is deployed on Railway. Auto-deploy from GitHub is **not** configured.
+
+**Project links:**
+- Railway Dashboard: https://railway.com/project/dc717d4d-c3d8-4728-838e-a439e6a44f53
+- GitHub Repo: https://github.com/tseoeo/pool--inspector
 
 **To deploy:**
 ```bash
