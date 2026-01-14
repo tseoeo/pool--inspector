@@ -5,6 +5,33 @@
 > **For collaboration guidelines, see [CONTRIBUTING.md](./CONTRIBUTING.md)**
 > **For data structure details, see [DATA.md](./DATA.md)**
 
+## Current Status
+
+**Last updated:** 2025-01-14
+
+| Item | Status |
+|------|--------|
+| Current branch | `ivan` (data/backend work) |
+| Main branch | Up to date, deployed |
+| Railway | Deployed, production running |
+| Database | PostgreSQL on Railway |
+
+**Recent changes:**
+- Added data explorer page (`/explore`) with filters and CSV export
+- Added project documentation (`CLAUDE.md`, `CONTRIBUTING.md`, `DATA.md`)
+- Set up branch workflow for parallel development
+
+**Active data sources:**
+- Austin, TX (Socrata) - transformer ready
+- Webster, TX (ArcGIS) - transformer ready
+
+**Next steps:**
+- Run initial data ingestion (`npm run ingest:backfill`)
+- Add more jurisdictions/data sources
+- Frontend improvements (colleague's work)
+
+---
+
 ## Overview
 
 Pool Inspection Index aggregates public pool and spa inspection records from municipal health departments across the United States. Data is sourced from official government APIs (Socrata, ArcGIS) and updated daily.
