@@ -22,8 +22,9 @@ model Jurisdiction {
   createdAt DateTime         @default(now())
   updatedAt DateTime         @updatedAt
 
-  sources    Source[]
-  facilities Facility[]
+  sources            Source[]
+  facilities         Facility[]
+  targetJurisdiction TargetJurisdiction?
 
   @@index([state])
   @@index([slug])
@@ -34,6 +35,42 @@ enum JurisdictionType {
   COUNTY
   HEALTH_DISTRICT
   STATE
+}
+
+// Target jurisdictions for coverage tracking
+// Tracks all jurisdictions we want to collect data from
+model TargetJurisdiction {
+  id            String           @id @default(cuid())
+  state         String           // State code (e.g., "TX")
+  name          String           // e.g., "Austin", "Harris County"
+  type          JurisdictionType
+
+  // Data source research
+  dataPortal    String?          // Known data portal URL if found
+  apiType       String?          // "socrata", "arcgis", "none", "unknown"
+  notes         String?          // Research notes
+
+  // Link to actual jurisdiction if we have it
+  jurisdictionId String?         @unique
+  jurisdiction   Jurisdiction?   @relation(fields: [jurisdictionId], references: [id])
+
+  // Tracking
+  status        TargetStatus     @default(NOT_RESEARCHED)
+  priority      Int              @default(0)  // Higher = more important
+
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+
+  @@unique([state, name])
+  @@index([state])
+  @@index([status])
+}
+
+enum TargetStatus {
+  NOT_RESEARCHED   // Haven't looked yet
+  NO_PUBLIC_DATA   // Researched, no public API available
+  DATA_FOUND       // Found data source, not yet integrated
+  INTEGRATED       // Fully integrated (has linked jurisdiction)
 }
 
 model Source {

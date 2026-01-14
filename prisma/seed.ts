@@ -1,7 +1,8 @@
 import "dotenv/config";
 import { Pool } from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient, JurisdictionType, AdapterType } from "@prisma/client";
+import { PrismaClient, JurisdictionType, AdapterType, TargetStatus } from "@prisma/client";
+import { TARGET_JURISDICTIONS } from "../src/lib/target-jurisdictions";
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -165,6 +166,48 @@ async function main() {
     },
   });
   console.log(`Created source: ${montgomeryMDSource.name} (${montgomeryMDSource.id})`);
+
+  // Seed target jurisdictions for coverage tracking
+  console.log("\nSeeding target jurisdictions...");
+
+  // First, get all existing jurisdictions for linking
+  const existingJurisdictions = await prisma.jurisdiction.findMany({
+    select: { id: true, name: true, state: true },
+  });
+
+  // Create a map for quick lookup (normalize names for matching)
+  const jurisdictionMap = new Map<string, string>();
+  for (const j of existingJurisdictions) {
+    // Map by "state-normalizedName" for matching
+    const key = `${j.state}-${j.name.toLowerCase().replace(/city of |county of /gi, "").trim()}`;
+    jurisdictionMap.set(key, j.id);
+  }
+
+  // Batch create all target jurisdictions
+  const targetData = TARGET_JURISDICTIONS.map((target) => {
+    const normalizedName = target.name.toLowerCase().replace(/city of |county of /gi, "").trim();
+    const lookupKey = `${target.state}-${normalizedName}`;
+    const matchedJurisdictionId = jurisdictionMap.get(lookupKey);
+
+    return {
+      state: target.state,
+      name: target.name,
+      type: target.type as JurisdictionType,
+      priority: target.priority || 0,
+      status: matchedJurisdictionId ? TargetStatus.INTEGRATED : TargetStatus.NOT_RESEARCHED,
+      jurisdictionId: matchedJurisdictionId || null,
+    };
+  });
+
+  // Delete existing and recreate for simplicity
+  await prisma.targetJurisdiction.deleteMany({});
+  const result = await prisma.targetJurisdiction.createMany({
+    data: targetData,
+    skipDuplicates: true,
+  });
+
+  const linked = targetData.filter((t) => t.jurisdictionId).length;
+  console.log(`Seeded ${result.count} target jurisdictions (${linked} linked to existing data)`);
 
   console.log("\nSeeding complete!");
   console.log("\nTo run ingestion:");
