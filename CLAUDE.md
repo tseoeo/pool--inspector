@@ -3,6 +3,7 @@
 > **Note:** Keep this file updated when making significant changes to the project structure, adding new features, or modifying deployment configuration.
 
 > **For collaboration guidelines, see [CONTRIBUTING.md](./CONTRIBUTING.md)**
+> **For data structure details, see [DATA.md](./DATA.md)**
 
 ## Overview
 
