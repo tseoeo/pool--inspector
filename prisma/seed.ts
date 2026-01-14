@@ -116,13 +116,66 @@ async function main() {
   });
   console.log(`Created source: ${websterSource.name} (${websterSource.id})`);
 
+  // Create Montgomery County MD jurisdiction
+  const montgomeryMD = await prisma.jurisdiction.upsert({
+    where: { slug: "montgomery-county-md" },
+    update: {},
+    create: {
+      slug: "montgomery-county-md",
+      name: "Montgomery County",
+      state: "MD",
+      type: JurisdictionType.COUNTY,
+      timezone: "America/New_York",
+      website: "https://www.montgomerycountymd.gov",
+    },
+  });
+  console.log(`Created jurisdiction: ${montgomeryMD.name} (${montgomeryMD.id})`);
+
+  // Create Montgomery County MD Socrata source
+  const montgomeryMDSource = await prisma.source.upsert({
+    where: {
+      id: "montgomery-md-socrata-source",
+    },
+    update: {
+      name: "Montgomery County Pool Inspections (Socrata)",
+      endpoint: "https://data.montgomerycountymd.gov/resource/k35y-k582.json",
+      config: {
+        resource: "k35y-k582",
+        updatedAtField: ":updated_at",
+        orderByField: "inspection_date",
+        idField: "establishmentid",
+        batchSize: 1000,
+      },
+    },
+    create: {
+      id: "montgomery-md-socrata-source",
+      jurisdictionId: montgomeryMD.id,
+      name: "Montgomery County Pool Inspections (Socrata)",
+      adapterType: AdapterType.SOCRATA,
+      endpoint: "https://data.montgomerycountymd.gov/resource/k35y-k582.json",
+      isActive: true,
+      config: {
+        resource: "k35y-k582",
+        updatedAtField: ":updated_at",
+        orderByField: "inspection_date",
+        idField: "establishmentid",
+        batchSize: 1000,
+      },
+      requestsPerMinute: 60,
+    },
+  });
+  console.log(`Created source: ${montgomeryMDSource.name} (${montgomeryMDSource.id})`);
+
   console.log("\nSeeding complete!");
   console.log("\nTo run ingestion:");
   console.log(
-    `  Austin:  npm run ingest:backfill -- --source ${austinSource.id}`
+    `  Austin:         npm run ingest:backfill -- --source ${austinSource.id}`
   );
   console.log(
-    `  Webster: npm run ingest:backfill -- --source ${websterSource.id}`
+    `  Webster:        npm run ingest:backfill -- --source ${websterSource.id}`
+  );
+  console.log(
+    `  Montgomery MD:  npm run ingest:backfill -- --source ${montgomeryMDSource.id}`
   );
 }
 

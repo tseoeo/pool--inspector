@@ -5,6 +5,7 @@ import { ArcGISAdapter } from "./adapters/arcgis";
 import type { TransformerFunction } from "@/types/ingestion";
 import { transformAustin } from "./transformers/austin";
 import { transformWebster } from "./transformers/webster";
+import { transformMontgomeryMD } from "./transformers/montgomery-md";
 
 type AdapterClass = new (source: Source) => BaseAdapter;
 
@@ -19,6 +20,7 @@ const adapterMap: Record<AdapterType, AdapterClass> = {
 const transformerMap: Record<string, TransformerFunction> = {
   "austin-tx": transformAustin,
   "webster-tx": transformWebster,
+  "montgomery-county-md": transformMontgomeryMD,
 };
 
 export function getAdapter(source: Source): BaseAdapter {
