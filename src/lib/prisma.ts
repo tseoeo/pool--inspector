@@ -1,4 +1,4 @@
-import { Pool } from "pg";
+import { Pool, PoolConfig } from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@prisma/client";
 
@@ -12,14 +12,22 @@ function createPrismaClient(): PrismaClient {
   // Detect Railway internal connections (no SSL needed)
   const isInternalConnection = connectionString?.includes(".railway.internal");
 
-  const pool = new Pool({
+  const poolConfig: PoolConfig = {
     connectionString,
-    max: 10,
+    max: 5,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 10000,
-    // Railway internal connections don't use SSL
-    ssl: isInternalConnection ? false : undefined,
-  });
+  };
+
+  // Railway internal connections don't use SSL
+  // External Railway connections (public URL) need SSL
+  if (isInternalConnection) {
+    poolConfig.ssl = false;
+  } else if (connectionString?.includes("railway.app")) {
+    poolConfig.ssl = { rejectUnauthorized: false };
+  }
+
+  const pool = new Pool(poolConfig);
 
   const adapter = new PrismaPg(pool);
 
