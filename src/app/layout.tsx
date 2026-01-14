@@ -36,12 +36,20 @@ export default function RootLayout({
             >
               Pool Inspection Index
             </Link>
-            <Link
-              href="/closures"
-              className="text-sm text-[var(--foreground-secondary)] hover:text-[var(--foreground)] transition-colors duration-150"
-            >
-              Closures
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/explore"
+                className="text-sm text-[var(--foreground-secondary)] hover:text-[var(--foreground)] transition-colors duration-150"
+              >
+                Explore
+              </Link>
+              <Link
+                href="/closures"
+                className="text-sm text-[var(--foreground-secondary)] hover:text-[var(--foreground)] transition-colors duration-150"
+              >
+                Closures
+              </Link>
+            </div>
           </nav>
         </header>
         <main className="flex-1">
