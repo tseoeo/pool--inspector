@@ -9,11 +9,16 @@ const globalForPrisma = globalThis as unknown as {
 function createPrismaClient(): PrismaClient {
   const connectionString = process.env.DATABASE_URL;
 
+  // Detect Railway internal connections (no SSL needed)
+  const isInternalConnection = connectionString?.includes(".railway.internal");
+
   const pool = new Pool({
     connectionString,
     max: 10,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 10000,
+    // Railway internal connections don't use SSL
+    ssl: isInternalConnection ? false : undefined,
   });
 
   const adapter = new PrismaPg(pool);
