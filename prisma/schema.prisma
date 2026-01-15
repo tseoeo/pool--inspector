@@ -1,7 +1,6 @@
-// Force rebuild 2026-01-15
 generator client {
   provider   = "prisma-client-js"
-  engineType = "library"
+  engineType = "binary"
 }
 
 datasource db {
