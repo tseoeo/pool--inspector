@@ -53,6 +53,39 @@ A city, county, or health district that publishes inspection data.
 **Relationships:**
 - Has many **Sources**
 - Has many **Facilities**
+- Has one **TargetJurisdiction** (optional, for coverage tracking)
+
+---
+
+### TargetJurisdiction
+
+Tracks jurisdictions we want to collect data from (coverage goals). Used by the `/coverage` page to show progress.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | string | Unique ID |
+| state | string | State code (e.g., "TX") |
+| name | string | Jurisdiction name (e.g., "Houston") |
+| type | enum | CITY, COUNTY, HEALTH_DISTRICT, STATE |
+| dataPortal | string? | Known data portal URL if found |
+| apiType | string? | "socrata", "arcgis", "none", "unknown" |
+| notes | string? | Research notes |
+| jurisdictionId | string? | Link to actual Jurisdiction if integrated |
+| status | enum | NOT_RESEARCHED, NO_PUBLIC_DATA, DATA_FOUND, INTEGRATED |
+| priority | int | Higher = more important (default: 0) |
+
+**Target Statuses:**
+- NOT_RESEARCHED - Haven't looked for data yet
+- NO_PUBLIC_DATA - Researched but no public API available
+- DATA_FOUND - Found data source, not yet integrated
+- INTEGRATED - Fully integrated (has linked Jurisdiction)
+
+**Relationships:**
+- Belongs to **Jurisdiction** (optional)
+
+**Uniqueness:** `state + name`
+
+**Seeded Data:** 247 target jurisdictions based on US population (top cities/counties per state)
 
 ---
 

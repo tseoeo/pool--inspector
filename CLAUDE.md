@@ -7,28 +7,32 @@
 
 ## Current Status
 
-**Last updated:** 2025-01-14
+**Last updated:** 2026-01-15
 
 | Item | Status |
 |------|--------|
-| Current branch | `ivan` (data/backend work) |
+| Current branch | `main` |
 | Main branch | Up to date, deployed |
 | Railway | Deployed, production running |
-| Database | PostgreSQL on Railway |
+| Database | PostgreSQL on Railway (`postgres-8mb0` service) |
+| Live URL | https://poolinspections.us |
 
 **Recent changes:**
-- Added data explorer page (`/explore`) with filters and CSV export
-- Added project documentation (`CLAUDE.md`, `CONTRIBUTING.md`, `DATA.md`)
-- Set up branch workflow for parallel development
+- Added coverage page (`/coverage`) with US map showing jurisdiction coverage
+- Added `TargetJurisdiction` model for tracking coverage goals (247 targets)
+- Downgraded Prisma from 7.x to 6.x (7.x had breaking changes with adapters)
+- Recreated Postgres database (old service had networking issues)
+- Backfilled data for Austin, Montgomery County
 
 **Active data sources:**
-- Austin, TX (Socrata) - transformer ready
-- Webster, TX (ArcGIS) - transformer ready
+- Austin, TX (Socrata) - ✅ ~950 facilities
+- Montgomery County, MD (Socrata) - ✅ ~450 facilities
+- Webster, TX (ArcGIS) - ❌ Endpoint not responding
 
 **Next steps:**
-- Run initial data ingestion (`npm run ingest:backfill`)
+- Fix Webster ArcGIS adapter or find alternative data source
 - Add more jurisdictions/data sources
-- Frontend improvements (colleague's work)
+- Frontend improvements
 
 ---
 
@@ -42,7 +46,7 @@ Pool Inspection Index aggregates public pool and spa inspection records from mun
 
 - **Framework:** Next.js 16.1.1 (App Router)
 - **Language:** TypeScript
-- **Database:** PostgreSQL with Prisma 7.2
+- **Database:** PostgreSQL with Prisma 6.x (downgraded from 7.x due to breaking changes)
 - **Styling:** Tailwind CSS 4 with CSS custom properties
 - **Fonts:** Geist Sans & Geist Mono
 - **Deployment:** Railway
@@ -66,6 +70,7 @@ pool-inspection/
 │   │   ├── globals.css    # Design system (CSS variables)
 │   │   ├── (seo)/
 │   │   │   ├── closures/page.tsx           # Recent closures list
+│   │   │   ├── coverage/page.tsx           # US coverage map
 │   │   │   ├── explore/page.tsx            # Data explorer with filters
 │   │   │   ├── facilities/[slug]/page.tsx  # Facility detail page
 │   │   │   └── jurisdictions/[slug]/page.tsx # Jurisdiction detail
@@ -101,6 +106,7 @@ Key models in `prisma/schema.prisma`:
 | Model | Purpose |
 |-------|---------|
 | `Jurisdiction` | Cities/counties/health districts |
+| `TargetJurisdiction` | Coverage tracking - 247 US jurisdictions we want to collect |
 | `Source` | API endpoints with sync metadata |
 | `Facility` | Individual pools/spas with location |
 | `InspectionEvent` | Inspection records with results/scores |
@@ -112,6 +118,7 @@ Key models in `prisma/schema.prisma`:
 
 - **Homepage:** Stats overview, jurisdiction list, recent activity
 - **Explore Page:** Filter by jurisdiction, date range, result type; paginated table; CSV export
+- **Coverage Page:** US map showing data coverage by state with progress percentages
 - **Closures Page:** Recent pool closures (last 90 days)
 - **Facility Pages:** Inspection history for individual facilities
 - **Jurisdiction Pages:** Stats and facilities per jurisdiction
