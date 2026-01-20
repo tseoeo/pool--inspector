@@ -7,6 +7,7 @@ import { LACountyScraperAdapter } from "./adapters/la-county-scraper";
 import { GeorgiaTylerAdapter } from "./adapters/georgia-tyler";
 import { TarrantScraperAdapter } from "./adapters/tarrant-scraper";
 import { HoustonScraperAdapter } from "./adapters/houston-scraper";
+import { EbridgeScraperAdapter } from "./adapters/ebridge-scraper";
 import type { TransformerFunction } from "@/types/ingestion";
 import { transformAustin } from "./transformers/austin";
 import { transformWebster } from "./transformers/webster";
@@ -20,6 +21,7 @@ import { transformArlington } from "./transformers/arlington";
 import { transformJacksonCountyOR } from "./transformers/jackson-county-or";
 import { transformTarrantCounty } from "./transformers/tarrant-county";
 import { transformHouston } from "./transformers/houston";
+import { transformHillsborough } from "./transformers/hillsborough";
 
 type AdapterClass = new (source: Source) => BaseAdapter;
 
@@ -45,6 +47,7 @@ const transformerMap: Record<string, TransformerFunction> = {
   "jackson-county-or": transformJacksonCountyOR,
   "tarrant-county-tx": transformTarrantCounty,
   "houston-tx": transformHouston,
+  "hillsborough-county-fl": transformHillsborough,
 };
 
 // Map specific source IDs to scraper adapters (for SCRAPER type sources)
@@ -54,6 +57,7 @@ const scraperMap: Record<string, new (source: Source) => BaseAdapter> = {
   "georgia-statewide-tyler-source": GeorgiaTylerAdapter,
   "tarrant-county-tx-scraper-source": TarrantScraperAdapter,
   "houston-tx-scraper-source": HoustonScraperAdapter,
+  "hillsborough-county-fl-ebridge-source": EbridgeScraperAdapter,
 };
 
 export function getAdapter(source: Source): BaseAdapter {

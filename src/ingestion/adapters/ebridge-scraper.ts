@@ -26,6 +26,7 @@ interface EbridgeConfig {
   program: string; // e.g., "Swimming Pool"
   batchSize: number;
   timeout: number;
+  retryAttempts: number;
 }
 
 interface EbridgeCursorData {
@@ -59,6 +60,7 @@ export class EbridgeScraperAdapter extends BaseAdapter {
       program: (config.program as string) || 'Swimming Pool',
       batchSize: (config.batchSize as number) || DEFAULT_CONFIG.batchSize!,
       timeout: (config.timeout as number) || DEFAULT_CONFIG.timeout!,
+      retryAttempts: (config.retryAttempts as number) || 3,
     };
   }
 
