@@ -1,21 +1,21 @@
 # Backfill Status Tracker
 
-> **Last Updated:** 2026-01-20 14:20 EET
-> **Total Inspections in DB:** 91,237
+> **Last Updated:** 2026-01-20 18:30 EET
+> **Total Inspections in DB:** ~91,300
 
 ## Active Backfills
 
 | Source | Task ID | Status | Progress | Estimate | Notes |
 |--------|---------|--------|----------|----------|-------|
-| Georgia | `b08d72d` | ✅ Running | 155+ | ~5,500-6,000 | Restarted; previous run got 5,125 before timeout |
+| None currently active | | | | | Railway DB dropping connections; restart after stabilizes |
 
 ## Estimates
 
 | Source | Current in DB | Estimated Total | Notes |
 |--------|---------------|-----------------|-------|
 | Georgia | 5,125 | ~5,500-6,000 | Tyler portal, statewide. May have more pages beyond offset 1025 |
-| Houston | 201 | **~3,500+** | **FIXED** - site has start=3481. Bug was checking pagination after navigating away |
-| LA County | 99 | ~1,000-5,000? | **Needs fix** - only scraped 100 facilities. Huge county should have much more |
+| Houston | ~200 | **~3,500+** | **FIXED** - site has start=3481. Bug was checking pagination after navigating away |
+| LA County | ~100 | **~300** | **FIXED** - 3 pages × 100 facilities. Site uses JS pagination (goPageIndex) |
 
 ## Previous Run
 
@@ -54,12 +54,14 @@
    - Backfills use cursor-based pagination, can resume after drops
    - Monitor: `railway logs`
 
-2. **Houston Low Record Count** - Only 204 records for a major city
-   - May need to adjust search parameters or date range
-   - Possible: Many pools managed by Harris County instead
+2. ~~**Houston Low Record Count**~~ - **FIXED** (2026-01-20)
+   - Was checking pagination after navigating away from search results
+   - Now properly continues to all ~3,500 facilities
 
-3. **LA County Limited Results** - Only 100 facilities returned
-   - Site pagination may need investigation
+3. ~~**LA County Limited Results**~~ - **FIXED** (2026-01-20)
+   - Site uses JavaScript pagination (`goPageIndex(n)`)
+   - Added pagination handling via `page.evaluate()` to call JS function directly
+   - Now properly processes all 3 pages (~300 facilities)
 
 ## Commands
 

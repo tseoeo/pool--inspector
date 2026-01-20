@@ -62,7 +62,7 @@ export class LACountyScraperAdapter extends BaseAdapter {
     }
   }
 
-  private async navigateToResults(): Promise<void> {
+  private async navigateToResults(pageIndex: number = 0): Promise<void> {
     if (!this.page) {
       throw new Error("Browser not initialized");
     }
@@ -85,6 +85,72 @@ export class LACountyScraperAdapter extends BaseAdapter {
     });
 
     console.log("Results table loaded");
+
+    // Navigate to the correct page if not on first page
+    if (pageIndex > 0) {
+      console.log(`Navigating to page ${pageIndex + 1}...`);
+      await this.goToPage(pageIndex);
+    }
+  }
+
+  private async goToPage(pageIndex: number): Promise<void> {
+    if (!this.page) {
+      throw new Error("Browser not initialized");
+    }
+
+    // LA County uses JavaScript pagination: goPageIndex(n) where n is 0-indexed
+    // We need to click through pages or call the JS function directly
+    await this.page.evaluate((idx) => {
+      // @ts-ignore - goPageIndex is a global function on the page
+      if (typeof goPageIndex === "function") {
+        goPageIndex(idx);
+      }
+    }, pageIndex);
+
+    // Wait for table to reload
+    await this.page.waitForTimeout(1000);
+    await this.page.waitForSelector("table.table-bordered", {
+      timeout: this.config.searchTimeout,
+    });
+
+    console.log(`Now on page ${pageIndex + 1}`);
+  }
+
+  private async hasNextPage(): Promise<boolean> {
+    if (!this.page) {
+      return false;
+    }
+
+    // Check for "Next" link or pagination indicator
+    // LA County uses goPageIndex(n) links - check if there's a link to a higher page
+    const paginationLinks = await this.page.$$("a[href*='goPageIndex']");
+    if (paginationLinks.length === 0) {
+      // Also check for onclick handlers
+      const nextLink = await this.page.$("a:has-text('Next'), a:has-text('>')");
+      return nextLink !== null;
+    }
+
+    // Find the highest page index available
+    let maxPageIndex = 0;
+    for (const link of paginationLinks) {
+      const onclick = await link.getAttribute("onclick");
+      const href = await link.getAttribute("href");
+      const text = onclick || href || "";
+      const match = text.match(/goPageIndex\((\d+)\)/);
+      if (match) {
+        const idx = parseInt(match[1], 10);
+        if (idx > maxPageIndex) {
+          maxPageIndex = idx;
+        }
+      }
+    }
+
+    // Get current page from URL or page state
+    const currentUrl = this.page.url();
+    const currentMatch = currentUrl.match(/pageIndex=(\d+)/);
+    const currentPage = currentMatch ? parseInt(currentMatch[1], 10) : 0;
+
+    return maxPageIndex > currentPage;
   }
 
   private async parseFacilityRows(): Promise<ParsedFacility[]> {
@@ -247,12 +313,17 @@ export class LACountyScraperAdapter extends BaseAdapter {
     const records: RawPayload[] = [];
 
     try {
-      // Navigate to results page
-      await this.navigateToResults();
+      // Navigate to results page (with pagination if needed)
+      console.log(`Fetching LA County page ${state.pageIndex + 1}, facility index ${state.facilityIndex}`);
+      await this.navigateToResults(state.pageIndex);
 
       // Parse facilities from the current page
       const facilities = await this.parseFacilityRows();
-      console.log(`Parsed ${facilities.length} facilities`);
+      console.log(`Parsed ${facilities.length} facilities on page ${state.pageIndex + 1}`);
+
+      // Check if there's a next page BEFORE processing (similar to Houston fix)
+      const nextPageExists = await this.hasNextPage();
+      console.log(`Has next page: ${nextPageExists}`);
 
       // Process facilities starting from where we left off
       const startIndex = state.facilityIndex;
@@ -262,7 +333,6 @@ export class LACountyScraperAdapter extends BaseAdapter {
         const facility = facilities[i];
 
         // For now, just use the data from the main page
-        // (We could fetch individual inspection histories but that's slow)
         const inspections = [{
           date: facility.inspectionDate,
           result: "Routine Inspection",
@@ -301,15 +371,29 @@ export class LACountyScraperAdapter extends BaseAdapter {
       // Update cursor state
       state.facilityIndex = endIndex;
 
-      // Check if there's more on this page
-      const hasMore = endIndex < facilities.length;
+      // Determine if there's more data
+      const finishedCurrentPage = endIndex >= facilities.length;
+      let hasMore = false;
+      let nextCursor: CursorState | null = null;
 
-      const nextCursor: CursorState | null = hasMore
-        ? {
-            type: "objectid",
-            value: JSON.stringify(state),
-          }
-        : null;
+      if (!finishedCurrentPage) {
+        // More facilities on this page
+        hasMore = true;
+        nextCursor = {
+          type: "objectid",
+          value: JSON.stringify(state),
+        };
+      } else if (nextPageExists) {
+        // Move to next page
+        hasMore = true;
+        state.pageIndex++;
+        state.facilityIndex = 0;
+        nextCursor = {
+          type: "objectid",
+          value: JSON.stringify(state),
+        };
+        console.log(`Moving to page ${state.pageIndex + 1}`);
+      }
 
       return {
         records,
@@ -317,7 +401,9 @@ export class LACountyScraperAdapter extends BaseAdapter {
         hasMore,
         metadata: {
           fetchedAt: new Date(),
-          totalAvailable: facilities.length,
+          pageIndex: state.pageIndex,
+          totalProcessed: state.totalProcessed,
+          facilitiesOnPage: facilities.length,
         },
       };
     } catch (error) {
