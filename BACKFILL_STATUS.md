@@ -1,52 +1,47 @@
 # Backfill Status Tracker
 
-> **Last Updated:** 2026-01-20 18:30 EET
-> **Total Inspections in DB:** ~91,300
+> **Last Updated:** 2026-01-20 19:45 EET
+> **Total Inspections in DB:** 91,499
+> **Total Facilities:** 15,971
+> **Total Jurisdictions:** 12
 
 ## Active Backfills
 
 | Source | Task ID | Status | Progress | Estimate | Notes |
 |--------|---------|--------|----------|----------|-------|
-| Georgia | `bb991c3` | ✅ Running | Page 34+ | ~1,100 pages | Using new `--resume` flag to continue from saved cursor |
+| Georgia | `b2c143b` | ✅ Running | Page 1046 (~95%) | ~1,100 pages | Using `--resume` flag; almost complete |
 
-## Estimates
+## Current Database Counts
 
-| Source | Current in DB | Estimated Total | Notes |
-|--------|---------------|-----------------|-------|
-| Georgia | 5,125 | ~5,500-6,000 | Tyler portal, statewide. May have more pages beyond offset 1025 |
-| Houston | ~200 | **~3,500+** | **FIXED** - site has start=3481. Bug was checking pagination after navigating away |
-| LA County | ~100 | **~300** | **FIXED** - 3 pages × 100 facilities. Site uses JS pagination (goPageIndex) |
-
-## Previous Run
-
-| Source | Task ID | Status | Progress | Notes |
-|--------|---------|--------|----------|-------|
-| Georgia | `bd2b472` | ⚠️ Failed (DB timeout) | 5,125 records | Got 756 new records before connection pool timeout |
-
-## Recently Completed (2026-01-20)
-
-| Source | Task ID | Records | New/Updated | Duration | Notes |
-|--------|---------|---------|-------------|----------|-------|
-| Houston | `b8fcc30` | 204 | 0 new, 6 updated | 393s | Only ~40 facilities found - needs investigation |
-| LA County | `bbedda7` | 100 | 5 new | 306s | Site only returned 100 facilities |
-| Tarrant County | `bf8f9b2` | 1,012 | 291 new | 1816s | Completed successfully |
-
-## Completed Backfills (Historical)
-
-| Source | Records in DB | Notes |
-|--------|---------------|-------|
+| Jurisdiction | Inspections | Notes |
+|--------------|-------------|-------|
 | Maricopa County | 57,124 | Largest dataset |
 | Montgomery County | 10,865 | Socrata API |
-| Austin | 5,972 | Socrata API |
-| NYC | 5,747 | Socrata API |
-| Georgia | 5,125 | Tyler Technologies portal |
-| Louisville | 3,889 | ArcGIS |
-| Arlington | 1,693 | ArcGIS |
+| City of Austin | 5,972 | Socrata API |
+| New York City | 5,747 | Socrata API |
+| State of Georgia | 5,230 | Tyler portal (backfill in progress) |
+| Louisville Metro | 3,889 | ArcGIS |
+| City of Arlington | 1,693 | ArcGIS |
+| City of Houston | 358 | Tyler portal (**needs full backfill**) |
 | Tarrant County | 291 | Playwright scraper |
 | Jackson County | 207 | ArcGIS |
-| Houston | 201 | Tyler Technologies portal |
-| LA County | 99 | Playwright scraper |
-| Webster | 24 | ArcGIS (server offline) |
+| Los Angeles County | 100 | Playwright (**needs full backfill**) |
+| City of Webster | 24 | ArcGIS (server offline) |
+
+## Pending Backfills
+
+| Source | Current | Estimated Total | Status | Notes |
+|--------|---------|-----------------|--------|-------|
+| Houston | 358 | **~3,500+** | 🔧 Ready | Pagination fixed; site has start=3481 |
+| LA County | 100 | **~300** | 🔧 Ready | JS pagination fixed; 3 pages × 100 facilities |
+
+## Recently Fixed (2026-01-20)
+
+| Issue | Fix |
+|-------|-----|
+| Houston pagination | Was checking for next page after navigating away from results |
+| LA County pagination | Added `goPageIndex(n)` JS function call via Playwright evaluate |
+| Backfill resume | Added `--resume` flag to continue from saved cursor after DB drops |
 
 ## Known Issues
 
@@ -66,18 +61,23 @@
 ## Commands
 
 ```bash
-# Check active backfill progress
-tail -f /private/tmp/claude/-Users-ivandimitrov-Projects-pool--inspector/tasks/bd2b472.output
-
-# Restart a backfill
+# Start fresh backfill
 npm run ingest:backfill -- --source <source-id>
 
-# Check database counts
+# Resume backfill from saved cursor (after DB drop)
+npm run ingest:backfill -- --source <source-id> --resume
+
+# Check active backfill progress
+tail -f /private/tmp/claude/-Users-ivandimitrov-Projects-pool--inspector/tasks/<task-id>.output
+
+# Check database counts by jurisdiction
 npx tsx -e 'import { PrismaClient } from "@prisma/client"; const p = new PrismaClient(); p.$queryRaw`SELECT j.name, COUNT(ie.id)::int as c FROM "Jurisdiction" j LEFT JOIN "Facility" f ON f."jurisdictionId" = j.id LEFT JOIN "InspectionEvent" ie ON ie."facilityId" = f.id GROUP BY j.name ORDER BY c DESC`.then(console.log).finally(() => p.$disconnect())'
 
+# Check total counts
+npx tsx -e 'import { PrismaClient } from "@prisma/client"; const p = new PrismaClient(); Promise.all([p.inspectionEvent.count(), p.facility.count()]).then(([i,f]) => console.log("Inspections:", i, "Facilities:", f)).finally(() => p.$disconnect())'
+
 # Kill zombie processes
-ps aux | grep backfill | grep -v grep
-kill <pid>
+pkill -f "backfill.*<source-id>"
 ```
 
 ## Source IDs Reference

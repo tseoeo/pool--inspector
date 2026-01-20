@@ -302,7 +302,7 @@ Record of each data sync attempt.
 |-------|------|-------------|
 | id | string | Unique ID |
 | sourceId | string | Which source was synced |
-| syncType | enum | BACKFILL, INCREMENTAL, MANUAL |
+| syncType | enum | BACKFILL, INCREMENTAL, MANUAL, RESUME |
 | status | enum | SUCCESS, PARTIAL, FAILED |
 | startedAt | datetime | When sync started |
 | completedAt | datetime? | When sync finished |

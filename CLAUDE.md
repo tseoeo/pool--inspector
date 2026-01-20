@@ -7,7 +7,7 @@
 
 ## Current Status
 
-**Last updated:** 2026-01-15
+**Last updated:** 2026-01-20
 
 | Item | Status |
 |------|--------|
@@ -16,30 +16,37 @@
 | Railway | Deployed, production running |
 | Database | PostgreSQL on Railway (`postgres-8mb0` service) |
 | Live URL | https://poolinspections.us |
+| Total Inspections | 91,499 |
+| Total Facilities | 15,971 |
+| Total Jurisdictions | 12 |
 
-**Recent changes:**
-- Added coverage page (`/coverage`) with US map showing jurisdiction coverage
-- Added `TargetJurisdiction` model for tracking coverage goals (247 targets)
-- Downgraded Prisma from 7.x to 6.x (7.x had breaking changes with adapters)
-- Recreated Postgres database (old service had networking issues)
-- Backfilled data for Austin, Montgomery County
+**Recent changes (2026-01-20):**
+- Added Houston scraper (Tyler Technologies portal)
+- Added LA County scraper (Playwright + JS pagination)
+- Fixed Houston pagination bug (was checking after navigating away)
+- Fixed LA County pagination (added `goPageIndex(n)` JS call)
+- Added `--resume` flag to backfill script for DB drop recovery
+- Added `RESUME` sync type for cursor-based continuation
 
 **Active data sources:**
-| Source | Type | Status | Notes |
-|--------|------|--------|-------|
-| Austin, TX | Socrata | ✅ Active | ~950 facilities |
-| Montgomery County, MD | Socrata | ✅ Active | ~450 facilities (slow ~10s response) |
-| Webster, TX | ArcGIS | ❌ Inactive | Server offline (see investigation below) |
-
-**Webster Investigation (2026-01-15):**
-- `www1.cityofwebster.com` (72.20.140.78 on PS Lightwave) is unreachable
-- TCP connections timeout - server appears decommissioned
-- Main city website migrated to CivicPlus cloud, but ArcGIS stayed on old infrastructure
-- No alternative endpoint found on ArcGIS Hub/Online
-- Source marked inactive; use `npm run sources:check` to monitor recovery
+| Source | Type | Status | Records | Notes |
+|--------|------|--------|---------|-------|
+| Maricopa County, AZ | API | ✅ Active | 57,124 | Largest dataset |
+| Montgomery County, MD | Socrata | ✅ Active | 10,865 | |
+| Austin, TX | Socrata | ✅ Active | 5,972 | |
+| New York City, NY | Socrata | ✅ Active | 5,747 | |
+| Georgia (statewide) | Tyler | ✅ Active | 5,230 | Backfill in progress |
+| Louisville, KY | ArcGIS | ✅ Active | 3,889 | |
+| Arlington, TX | ArcGIS | ✅ Active | 1,693 | |
+| Houston, TX | Tyler | 🔧 Ready | 358 | Pagination fixed, needs full backfill |
+| Tarrant County, TX | Playwright | ✅ Active | 291 | |
+| Jackson County, OR | ArcGIS | ✅ Active | 207 | |
+| Los Angeles County, CA | Playwright | 🔧 Ready | 100 | Pagination fixed, needs full backfill |
+| Webster, TX | ArcGIS | ❌ Inactive | 24 | Server offline |
 
 **Next steps:**
-- Contact City of Webster about ArcGIS data availability
+- Run full Houston backfill (~3,500 records)
+- Run full LA County backfill (~300 records)
 - Add more jurisdictions/data sources (check `/coverage` for targets)
 - Frontend improvements
 
@@ -158,10 +165,11 @@ npm run db:seed      # Seed initial data
 npm run db:studio    # Open Prisma Studio
 
 # Ingestion
-npm run ingest:backfill  # Import historical data
-npm run ingest:daily     # Run incremental daily sync
-npm run sources:check    # Check health of all source endpoints
-npm run sources:check -- --fix  # Check and auto-update database status
+npm run ingest:backfill -- --source <id>           # Fresh backfill from start
+npm run ingest:backfill -- --source <id> --resume  # Resume from saved cursor
+npm run ingest:daily                                # Run incremental daily sync
+npm run sources:check                               # Check health of all source endpoints
+npm run sources:check -- --fix                      # Check and auto-update database status
 
 # Discovery
 npm run socrata:discover              # Full run: crawl → filter → import
