@@ -25,13 +25,22 @@
 - Backfilled data for Austin, Montgomery County
 
 **Active data sources:**
-- Austin, TX (Socrata) - ✅ ~950 facilities
-- Montgomery County, MD (Socrata) - ✅ ~450 facilities
-- Webster, TX (ArcGIS) - ❌ Endpoint not responding
+| Source | Type | Status | Notes |
+|--------|------|--------|-------|
+| Austin, TX | Socrata | ✅ Active | ~950 facilities |
+| Montgomery County, MD | Socrata | ✅ Active | ~450 facilities (slow ~10s response) |
+| Webster, TX | ArcGIS | ❌ Inactive | Server offline (see investigation below) |
+
+**Webster Investigation (2026-01-15):**
+- `www1.cityofwebster.com` (72.20.140.78 on PS Lightwave) is unreachable
+- TCP connections timeout - server appears decommissioned
+- Main city website migrated to CivicPlus cloud, but ArcGIS stayed on old infrastructure
+- No alternative endpoint found on ArcGIS Hub/Online
+- Source marked inactive; use `npm run sources:check` to monitor recovery
 
 **Next steps:**
-- Fix Webster ArcGIS adapter or find alternative data source
-- Add more jurisdictions/data sources
+- Contact City of Webster about ArcGIS data availability
+- Add more jurisdictions/data sources (check `/coverage` for targets)
 - Frontend improvements
 
 ---
@@ -59,7 +68,15 @@ pool-inspection/
 │   ├── schema.prisma      # Database schema (all models)
 │   └── seed.ts            # Database seeding script
 ├── scripts/
-│   └── backfill.ts        # Historical data import script
+│   ├── backfill.ts        # Historical data import script
+│   ├── check-sources.ts   # Source health monitoring
+│   └── socrata-discover/  # Socrata dataset discovery tool
+│       ├── index.ts       # CLI entry point
+│       ├── crawler.ts     # Discovery API client
+│       ├── scorer.ts      # Keyword scoring
+│       ├── matcher.ts     # Jurisdiction matching
+│       ├── importer.ts    # DB import
+│       └── types.ts       # Type definitions
 ├── workers/
 │   └── daily-ingestion/
 │       └── index.ts       # Daily incremental sync worker
@@ -143,6 +160,17 @@ npm run db:studio    # Open Prisma Studio
 # Ingestion
 npm run ingest:backfill  # Import historical data
 npm run ingest:daily     # Run incremental daily sync
+npm run sources:check    # Check health of all source endpoints
+npm run sources:check -- --fix  # Check and auto-update database status
+
+# Discovery
+npm run socrata:discover              # Full run: crawl → filter → import
+npm run socrata:discover -- crawl     # Just crawl Socrata API
+npm run socrata:discover -- filter    # Score and filter candidates
+npm run socrata:discover -- import    # Import to database
+npm run socrata:discover -- report    # Show summary report
+npm run socrata:discover -- --dry-run # Preview without DB changes
+npm run socrata:discover -- --verbose # Verbose output
 ```
 
 ## Deployment (Railway)

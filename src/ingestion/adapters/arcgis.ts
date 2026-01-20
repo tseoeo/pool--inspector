@@ -12,6 +12,7 @@ interface ArcGISConfig extends AdapterConfig {
   layerId: number;
   maxRecordCount: number;
   objectIdField: string;
+  whereClause?: string;
 }
 
 interface ArcGISFeature {
@@ -45,6 +46,7 @@ export class ArcGISAdapter extends BaseAdapter {
       layerId: (config.layerId as number) || 0,
       maxRecordCount: (config.maxRecordCount as number) || 1000,
       objectIdField: (config.objectIdField as string) || "OBJECTID",
+      whereClause: (config.whereClause as string) || undefined,
       batchSize: Math.min((config.batchSize as number) || 1000, 1000),
       timeout: (config.timeout as number) || 30000,
       retryAttempts: (config.retryAttempts as number) || 3,
@@ -52,9 +54,11 @@ export class ArcGISAdapter extends BaseAdapter {
   }
 
   async fetch(cursor: CursorState | null): Promise<FetchResult> {
-    let whereClause = "1=1";
+    // Build where clause: combine custom filter with pagination
+    const baseWhere = this.config.whereClause || "1=1";
+    let whereClause = baseWhere;
     if (cursor && cursor.type === "objectid") {
-      whereClause = `${this.config.objectIdField} > ${cursor.value}`;
+      whereClause = `(${baseWhere}) AND ${this.config.objectIdField} > ${cursor.value}`;
     }
 
     const params = new URLSearchParams({

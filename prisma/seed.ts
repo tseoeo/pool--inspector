@@ -159,6 +159,342 @@ async function main() {
   });
   console.log(`Created source: ${montgomeryMDSource.name} (${montgomeryMDSource.id})`);
 
+  // Create NYC jurisdiction
+  const nyc = await prisma.jurisdiction.upsert({
+    where: { slug: "new-york-city-ny" },
+    update: {},
+    create: {
+      slug: "new-york-city-ny",
+      name: "New York City",
+      state: "NY",
+      type: JurisdictionType.CITY,
+      timezone: "America/New_York",
+      website: "https://www.nyc.gov",
+    },
+  });
+  console.log(`Created jurisdiction: ${nyc.name} (${nyc.id})`);
+
+  // Create NYC Socrata source
+  const nycSource = await prisma.source.upsert({
+    where: {
+      id: "nyc-socrata-source",
+    },
+    update: {
+      name: "NYC Pool Inspections (Socrata)",
+      endpoint: "https://data.cityofnewyork.us/resource/3kfa-rvez.json",
+      config: {
+        resource: "3kfa-rvez",
+        updatedAtField: ":updated_at",
+        orderByField: "inspection_date",
+        idField: "accela",
+        batchSize: 1000,
+      },
+    },
+    create: {
+      id: "nyc-socrata-source",
+      jurisdictionId: nyc.id,
+      name: "NYC Pool Inspections (Socrata)",
+      adapterType: AdapterType.SOCRATA,
+      endpoint: "https://data.cityofnewyork.us/resource/3kfa-rvez.json",
+      isActive: true,
+      config: {
+        resource: "3kfa-rvez",
+        updatedAtField: ":updated_at",
+        orderByField: "inspection_date",
+        idField: "accela",
+        batchSize: 1000,
+      },
+      requestsPerMinute: 60,
+    },
+  });
+  console.log(`Created source: ${nycSource.name} (${nycSource.id})`);
+
+  // Create Maricopa County AZ jurisdiction
+  const maricopaAZ = await prisma.jurisdiction.upsert({
+    where: { slug: "maricopa-county-az" },
+    update: {},
+    create: {
+      slug: "maricopa-county-az",
+      name: "Maricopa County",
+      state: "AZ",
+      type: JurisdictionType.COUNTY,
+      timezone: "America/Phoenix",
+      website: "https://www.maricopa.gov",
+    },
+  });
+  console.log(`Created jurisdiction: ${maricopaAZ.name} (${maricopaAZ.id})`);
+
+  // Create Maricopa County AZ scraper source
+  const maricopaSource = await prisma.source.upsert({
+    where: {
+      id: "maricopa-az-scraper-source",
+    },
+    update: {
+      name: "Maricopa County Pool Inspections (Scraper)",
+      endpoint: "https://envapp.maricopa.gov",
+      config: {
+        batchSize: 20, // Process 20 facilities per batch (slower due to scraping)
+      },
+    },
+    create: {
+      id: "maricopa-az-scraper-source",
+      jurisdictionId: maricopaAZ.id,
+      name: "Maricopa County Pool Inspections (Scraper)",
+      adapterType: AdapterType.SCRAPER,
+      endpoint: "https://envapp.maricopa.gov",
+      isActive: true,
+      config: {
+        batchSize: 20, // Process 20 facilities per batch
+      },
+      requestsPerMinute: 10, // Be respectful with scraping
+    },
+  });
+  console.log(`Created source: ${maricopaSource.name} (${maricopaSource.id})`);
+
+  // Create LA County CA jurisdiction
+  const laCountyCA = await prisma.jurisdiction.upsert({
+    where: { slug: "la-county-ca" },
+    update: {},
+    create: {
+      slug: "la-county-ca",
+      name: "Los Angeles County",
+      state: "CA",
+      type: JurisdictionType.COUNTY,
+      timezone: "America/Los_Angeles",
+      website: "https://publichealth.lacounty.gov",
+    },
+  });
+  console.log(`Created jurisdiction: ${laCountyCA.name} (${laCountyCA.id})`);
+
+  // Create LA County CA scraper source (Playwright-based)
+  const laCountySource = await prisma.source.upsert({
+    where: {
+      id: "la-county-ca-scraper-source",
+    },
+    update: {
+      name: "LA County Pool Inspections (Scraper)",
+      endpoint: "https://ehservices.publichealth.lacounty.gov",
+      config: {
+        batchSize: 10, // Process 10 facilities per batch (browser-based scraping is slower)
+        searchTimeout: 30000,
+        pageSize: 50,
+      },
+    },
+    create: {
+      id: "la-county-ca-scraper-source",
+      jurisdictionId: laCountyCA.id,
+      name: "LA County Pool Inspections (Scraper)",
+      adapterType: AdapterType.SCRAPER,
+      endpoint: "https://ehservices.publichealth.lacounty.gov",
+      isActive: true,
+      config: {
+        batchSize: 10, // Process 10 facilities per batch (browser-based scraping is slower)
+        searchTimeout: 30000,
+        pageSize: 50,
+      },
+      requestsPerMinute: 5, // Be very respectful with browser-based scraping
+    },
+  });
+  console.log(`Created source: ${laCountySource.name} (${laCountySource.id})`);
+
+  // Create Georgia Statewide jurisdiction
+  const georgiaStatewide = await prisma.jurisdiction.upsert({
+    where: { slug: "georgia-statewide" },
+    update: {},
+    create: {
+      slug: "georgia-statewide",
+      name: "State of Georgia",
+      state: "GA",
+      type: JurisdictionType.STATE,
+      timezone: "America/New_York",
+      website: "https://dph.georgia.gov",
+    },
+  });
+  console.log(`Created jurisdiction: ${georgiaStatewide.name} (${georgiaStatewide.id})`);
+
+  // Create Georgia Tyler source (statewide environmental health portal)
+  const georgiaSource = await prisma.source.upsert({
+    where: {
+      id: "georgia-statewide-tyler-source",
+    },
+    update: {
+      name: "Georgia Pool Inspections (Tyler Technologies)",
+      endpoint: "https://ga.healthinspections.us/stateofgeorgia",
+      config: {
+        permitTypeFilter: "U3dpbW1pbmcgUG9vbA==", // Base64 encoded "Swimming Pool"
+        pageSize: 5, // API returns 5 results per page
+        batchSize: 5,
+      },
+    },
+    create: {
+      id: "georgia-statewide-tyler-source",
+      jurisdictionId: georgiaStatewide.id,
+      name: "Georgia Pool Inspections (Tyler Technologies)",
+      adapterType: AdapterType.SCRAPER, // Using SCRAPER type for custom adapters
+      endpoint: "https://ga.healthinspections.us/stateofgeorgia",
+      isActive: true,
+      config: {
+        permitTypeFilter: "U3dpbW1pbmcgUG9vbA==", // Base64 encoded "Swimming Pool"
+        pageSize: 5, // API returns 5 results per page
+        batchSize: 5,
+      },
+      requestsPerMinute: 30, // Respectful rate limiting
+    },
+  });
+  console.log(`Created source: ${georgiaSource.name} (${georgiaSource.id})`);
+
+  // Create Louisville Metro KY jurisdiction
+  const louisville = await prisma.jurisdiction.upsert({
+    where: { slug: "louisville-ky" },
+    update: {},
+    create: {
+      slug: "louisville-ky",
+      name: "Louisville Metro",
+      state: "KY",
+      type: JurisdictionType.COUNTY,
+      timezone: "America/New_York",
+      website: "https://louisvilleky.gov",
+    },
+  });
+  console.log(`Created jurisdiction: ${louisville.name} (${louisville.id})`);
+
+  // Create Louisville Metro ArcGIS source
+  const louisvilleSource = await prisma.source.upsert({
+    where: {
+      id: "louisville-ky-arcgis-source",
+    },
+    update: {
+      name: "Louisville Metro Pool Inspections (ArcGIS)",
+      endpoint:
+        "https://services1.arcgis.com/79kfd2K6fskCAkyg/arcgis/rest/services/Louisville_Metro_KY_Pool_Inspections/FeatureServer/0",
+      config: {
+        layerId: 0,
+        maxRecordCount: 2000,
+        objectIdField: "ObjectId",
+        batchSize: 1000,
+      },
+    },
+    create: {
+      id: "louisville-ky-arcgis-source",
+      jurisdictionId: louisville.id,
+      name: "Louisville Metro Pool Inspections (ArcGIS)",
+      adapterType: AdapterType.ARCGIS,
+      endpoint:
+        "https://services1.arcgis.com/79kfd2K6fskCAkyg/arcgis/rest/services/Louisville_Metro_KY_Pool_Inspections/FeatureServer/0",
+      isActive: true,
+      config: {
+        layerId: 0,
+        maxRecordCount: 2000,
+        objectIdField: "ObjectId",
+        batchSize: 1000,
+      },
+      requestsPerMinute: 60,
+    },
+  });
+  console.log(`Created source: ${louisvilleSource.name} (${louisvilleSource.id})`);
+
+  // Create Arlington TX jurisdiction
+  const arlington = await prisma.jurisdiction.upsert({
+    where: { slug: "arlington-tx" },
+    update: {},
+    create: {
+      slug: "arlington-tx",
+      name: "City of Arlington",
+      state: "TX",
+      type: JurisdictionType.CITY,
+      timezone: "America/Chicago",
+      website: "https://www.arlingtontx.gov",
+    },
+  });
+  console.log(`Created jurisdiction: ${arlington.name} (${arlington.id})`);
+
+  // Create Arlington TX ArcGIS source
+  const arlingtonSource = await prisma.source.upsert({
+    where: {
+      id: "arlington-tx-arcgis-source",
+    },
+    update: {
+      name: "Arlington Pool Inspections (ArcGIS)",
+      endpoint:
+        "https://gis2.arlingtontx.gov/agsext2/rest/services/OpenData/OD_Community/MapServer/11",
+      config: {
+        layerId: 11,
+        maxRecordCount: 1000,
+        objectIdField: "OBJECTID",
+        batchSize: 1000,
+      },
+    },
+    create: {
+      id: "arlington-tx-arcgis-source",
+      jurisdictionId: arlington.id,
+      name: "Arlington Pool Inspections (ArcGIS)",
+      adapterType: AdapterType.ARCGIS,
+      endpoint:
+        "https://gis2.arlingtontx.gov/agsext2/rest/services/OpenData/OD_Community/MapServer/11",
+      isActive: true,
+      config: {
+        layerId: 11,
+        maxRecordCount: 1000,
+        objectIdField: "OBJECTID",
+        batchSize: 1000,
+      },
+      requestsPerMinute: 60,
+    },
+  });
+  console.log(`Created source: ${arlingtonSource.name} (${arlingtonSource.id})`);
+
+  // Create Jackson County OR jurisdiction
+  const jacksonCountyOR = await prisma.jurisdiction.upsert({
+    where: { slug: "jackson-county-or" },
+    update: {},
+    create: {
+      slug: "jackson-county-or",
+      name: "Jackson County",
+      state: "OR",
+      type: JurisdictionType.COUNTY,
+      timezone: "America/Los_Angeles",
+      website: "https://jacksoncountyor.gov",
+    },
+  });
+  console.log(`Created jurisdiction: ${jacksonCountyOR.name} (${jacksonCountyOR.id})`);
+
+  // Create Jackson County OR ArcGIS source
+  const jacksonCountyORSource = await prisma.source.upsert({
+    where: {
+      id: "jackson-county-or-arcgis-source",
+    },
+    update: {
+      name: "Jackson County Pool Inspections (ArcGIS)",
+      endpoint:
+        "https://services1.arcgis.com/DwYBkWQPdaJNWrPG/arcgis/rest/services/Environmental_Health_Inspections_View/FeatureServer/0",
+      config: {
+        layerId: 0,
+        maxRecordCount: 1000,
+        objectIdField: "OBJECTID",
+        batchSize: 500,
+        whereClause: "module_1='Pool'",
+      },
+    },
+    create: {
+      id: "jackson-county-or-arcgis-source",
+      jurisdictionId: jacksonCountyOR.id,
+      name: "Jackson County Pool Inspections (ArcGIS)",
+      adapterType: AdapterType.ARCGIS,
+      endpoint:
+        "https://services1.arcgis.com/DwYBkWQPdaJNWrPG/arcgis/rest/services/Environmental_Health_Inspections_View/FeatureServer/0",
+      isActive: true,
+      config: {
+        layerId: 0,
+        maxRecordCount: 1000,
+        objectIdField: "OBJECTID",
+        batchSize: 500,
+        whereClause: "module_1='Pool'",
+      },
+      requestsPerMinute: 60,
+    },
+  });
+  console.log(`Created source: ${jacksonCountyORSource.name} (${jacksonCountyORSource.id})`);
+
   // Seed target jurisdictions for coverage tracking
   console.log("\nSeeding target jurisdictions...");
 
@@ -211,6 +547,27 @@ async function main() {
   );
   console.log(
     `  Montgomery MD:  npm run ingest:backfill -- --source ${montgomeryMDSource.id}`
+  );
+  console.log(
+    `  NYC:            npm run ingest:backfill -- --source ${nycSource.id}`
+  );
+  console.log(
+    `  Maricopa AZ:    npm run ingest:backfill -- --source ${maricopaSource.id}`
+  );
+  console.log(
+    `  LA County CA:   npm run ingest:backfill -- --source ${laCountySource.id}`
+  );
+  console.log(
+    `  Georgia:        npm run ingest:backfill -- --source ${georgiaSource.id}`
+  );
+  console.log(
+    `  Louisville:     npm run ingest:backfill -- --source ${louisvilleSource.id}`
+  );
+  console.log(
+    `  Arlington TX:   npm run ingest:backfill -- --source ${arlingtonSource.id}`
+  );
+  console.log(
+    `  Jackson Co OR:  npm run ingest:backfill -- --source ${jacksonCountyORSource.id}`
   );
 }
 
