@@ -539,6 +539,52 @@ async function main() {
   });
   console.log(`Created source: ${tarrantCountySource.name} (${tarrantCountySource.id})`);
 
+  // Create Houston TX jurisdiction
+  const houston = await prisma.jurisdiction.upsert({
+    where: { slug: "houston-tx" },
+    update: {},
+    create: {
+      slug: "houston-tx",
+      name: "City of Houston",
+      state: "TX",
+      type: JurisdictionType.CITY,
+      timezone: "America/Chicago",
+      website: "https://www.houstontx.gov",
+    },
+  });
+  console.log(`Created jurisdiction: ${houston.name} (${houston.id})`);
+
+  // Create Houston TX scraper source (Tyler Technologies portal)
+  const houstonSource = await prisma.source.upsert({
+    where: {
+      id: "houston-tx-scraper-source",
+    },
+    update: {
+      name: "Houston Pool Inspections (Web Scraper)",
+      endpoint: "https://tx.healthinspections.us/houston",
+      config: {
+        batchSize: 50,
+        timeout: 30000,
+        retryAttempts: 3,
+      },
+    },
+    create: {
+      id: "houston-tx-scraper-source",
+      jurisdictionId: houston.id,
+      name: "Houston Pool Inspections (Web Scraper)",
+      adapterType: AdapterType.SCRAPER,
+      endpoint: "https://tx.healthinspections.us/houston",
+      isActive: true,
+      config: {
+        batchSize: 50,
+        timeout: 30000,
+        retryAttempts: 3,
+      },
+      requestsPerMinute: 10, // Respectful rate limiting for web scraping
+    },
+  });
+  console.log(`Created source: ${houstonSource.name} (${houstonSource.id})`);
+
   // Seed target jurisdictions for coverage tracking
   console.log("\nSeeding target jurisdictions...");
 
@@ -612,6 +658,12 @@ async function main() {
   );
   console.log(
     `  Jackson Co OR:  npm run ingest:backfill -- --source ${jacksonCountyORSource.id}`
+  );
+  console.log(
+    `  Tarrant Co TX:  npm run ingest:backfill -- --source ${tarrantCountySource.id}`
+  );
+  console.log(
+    `  Houston TX:     npm run ingest:backfill -- --source ${houstonSource.id}`
   );
 }
 
