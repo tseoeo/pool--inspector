@@ -80,8 +80,8 @@ export class HoustonScraperAdapter extends BaseAdapter {
     try {
       page = await this.initBrowser();
 
-      // Build search URL for pools
-      const searchUrl = `${this.baseUrl}/search.cfm?start=${cursorData.start}&1=1&sd=01/01/2020&ed=12/31/2030&kw1=&kw2=&kw3=&rel1=F.name&rel2=F.name&rel3=F.name&zc=&facType=Pool&dtRng=NO&pre=similar`;
+      // Build search URL for pools - simplified to just facType and pagination
+      const searchUrl = `${this.baseUrl}/search.cfm?start=${cursorData.start}&1=1&facType=Pool`;
 
       console.log(`Fetching Houston pools from start=${cursorData.start}`);
       await page.goto(searchUrl, {
@@ -103,6 +103,11 @@ export class HoustonScraperAdapter extends BaseAdapter {
       }
 
       console.log(`Found ${uniqueFacilities.size} facilities on page`);
+
+      // Check for next page BEFORE navigating away from search results
+      const nextPageLink = await page.locator(`a[href*="start=${cursorData.start + 10}"]`).first();
+      const hasNextPage = await nextPageLink.count() > 0;
+      const facilitiesOnPage = uniqueFacilities.size;
 
       // Process each facility
       let facilityCount = 0;
@@ -136,14 +141,10 @@ export class HoustonScraperAdapter extends BaseAdapter {
         }
       }
 
-      // Determine next cursor
+      // Determine next cursor - use pagination check from BEFORE we navigated away
       let nextCursor: CursorState | null = null;
 
-      // Check if there are more pages
-      const nextPageLink = await page.locator(`a[href*="start=${cursorData.start + 10}"]`).first();
-      const hasNextPage = await nextPageLink.count() > 0;
-
-      if (hasNextPage || uniqueFacilities.size === 10) {
+      if (hasNextPage || facilitiesOnPage === 10) {
         // Move to next page
         nextCursor = this.createCursor({
           start: cursorData.start + 10,
