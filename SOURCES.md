@@ -8,10 +8,10 @@
 
 | Status | Count |
 |--------|-------|
-| **Active** | 10 |
+| **Active** | 11 |
 | **Inactive** | 1 |
 | **Blocked** | 3 |
-| **Potential** | 15+ |
+| **Potential** | 14+ |
 
 ---
 
@@ -27,6 +27,7 @@ Sources that are integrated and working.
 | Maricopa County, AZ | Scraper | `MaricopaScraperAdapter` | ~56,000 insp | Custom scraper for county portal |
 | Los Angeles County, CA | Scraper | `LACountyScraperAdapter` | ~100 insp | Web scraper, limited data |
 | State of Georgia | Scraper | `GeorgiaTylerAdapter` | ~8,000 insp | Tyler/MHD platform, pagination-based |
+| **Tarrant County, TX** | Scraper | `TarrantScraperAdapter` | TBD | Playwright-based, covers 27 cities (DFW area) |
 | Louisville Metro, KY | ArcGIS | `ArcGISAdapter` | ~2,000 insp | FeatureServer with chemistry data |
 | Arlington, TX | ArcGIS | `ArcGISAdapter` | ~1,700 insp | Score-based system |
 | Jackson County, OR | ArcGIS | `ArcGISAdapter` | ~200 insp | Uses whereClause filter for pools |
@@ -64,10 +65,23 @@ Sources with known APIs that could be integrated.
 
 | Jurisdiction | Type | Endpoint | Est. Size | Status | Notes |
 |-------------|------|----------|-----------|--------|-------|
-| Houston, TX | Web Portal | houstonconsumer.org | Large | **To investigate** | Search by name/zip/letter. Would need scraper. |
+| Houston, TX | Web Portal | houstonconsumer.org | Large | **Scraping needed** | Search by name/zip/letter. Would need scraper. |
 | San Diego County, CA | Unknown | data.sandiegocounty.gov | ~4,000 pools | **Not found** | Has pool program but no open data API found |
 | Clark County, NV (Las Vegas) | Unknown | clarkcountynv.gov | Large | **Not found** | Southern Nevada Health District handles pools |
 | Miami-Dade County, FL | Unknown | opendata.miamidade.gov | Large | **Not found** | Has open data portal but no pool inspections |
+
+### Investigated - Outdated Data
+
+| Jurisdiction | Type | Endpoint | Status | Notes |
+|-------------|------|----------|--------|-------|
+| Cincinnati/Hamilton County, OH | Socrata | data.cincinnati-oh.gov/ivda-umw7 | **Outdated** | 7,216 pool records but last updated 2015 |
+| Fort Worth, TX | Socrata | data.fortworthtexas.gov/xv5v-cjes | **Outdated** | Has pool inspections but data only through Aug 2019 |
+
+### Investigated - Too Small
+
+| Jurisdiction | Type | Records | Notes |
+|-------------|------|---------|-------|
+| Casper-Natrona County, WY | ArcGIS MapServer | 2 pools | Too small to be worth integrating |
 
 ### Medium Priority
 
@@ -215,3 +229,4 @@ For jurisdictions without open APIs, consider:
 | 2026-01-20 | Added Louisville, Arlington, Jackson County as active |
 | 2026-01-20 | Documented MHD/Tyler blocking and workarounds |
 | 2026-01-20 | Added Houston, Florida aggregate as potential sources |
+| 2026-01-20 | **Added Tarrant County, TX** - Playwright scraper for ASP.NET WebForms portal, covers 27 DFW-area cities |

@@ -18,6 +18,7 @@ export interface FetchResult {
   metadata: {
     totalAvailable?: number;
     fetchedAt: Date;
+    [key: string]: unknown;  // Allow additional scraper-specific metadata
   };
 }
 

@@ -5,6 +5,7 @@ import { ArcGISAdapter } from "./adapters/arcgis";
 import { MaricopaScraperAdapter } from "./adapters/maricopa-scraper";
 import { LACountyScraperAdapter } from "./adapters/la-county-scraper";
 import { GeorgiaTylerAdapter } from "./adapters/georgia-tyler";
+import { TarrantScraperAdapter } from "./adapters/tarrant-scraper";
 import type { TransformerFunction } from "@/types/ingestion";
 import { transformAustin } from "./transformers/austin";
 import { transformWebster } from "./transformers/webster";
@@ -16,6 +17,7 @@ import { transformGeorgia } from "./transformers/georgia";
 import { transformLouisville } from "./transformers/louisville";
 import { transformArlington } from "./transformers/arlington";
 import { transformJacksonCountyOR } from "./transformers/jackson-county-or";
+import { transformTarrantCounty } from "./transformers/tarrant-county";
 
 type AdapterClass = new (source: Source) => BaseAdapter;
 
@@ -39,6 +41,7 @@ const transformerMap: Record<string, TransformerFunction> = {
   "louisville-ky": transformLouisville,
   "arlington-tx": transformArlington,
   "jackson-county-or": transformJacksonCountyOR,
+  "tarrant-county-tx": transformTarrantCounty,
 };
 
 // Map specific source IDs to scraper adapters (for SCRAPER type sources)
@@ -46,6 +49,7 @@ const scraperMap: Record<string, new (source: Source) => BaseAdapter> = {
   "maricopa-az-scraper-source": MaricopaScraperAdapter,
   "la-county-ca-scraper-source": LACountyScraperAdapter,
   "georgia-statewide-tyler-source": GeorgiaTylerAdapter,
+  "tarrant-county-tx-scraper-source": TarrantScraperAdapter,
 };
 
 export function getAdapter(source: Source): BaseAdapter {

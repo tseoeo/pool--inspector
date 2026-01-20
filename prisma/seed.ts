@@ -495,6 +495,50 @@ async function main() {
   });
   console.log(`Created source: ${jacksonCountyORSource.name} (${jacksonCountyORSource.id})`);
 
+  // Create Tarrant County TX jurisdiction (covers 27+ cities in DFW area)
+  const tarrantCounty = await prisma.jurisdiction.upsert({
+    where: { slug: "tarrant-county-tx" },
+    update: {},
+    create: {
+      slug: "tarrant-county-tx",
+      name: "Tarrant County",
+      state: "TX",
+      type: JurisdictionType.COUNTY,
+      timezone: "America/Chicago",
+      website: "https://www.tarrantcounty.com",
+    },
+  });
+  console.log(`Created jurisdiction: ${tarrantCounty.name} (${tarrantCounty.id})`);
+
+  // Create Tarrant County TX scraper source
+  const tarrantCountySource = await prisma.source.upsert({
+    where: {
+      id: "tarrant-county-tx-scraper-source",
+    },
+    update: {
+      name: "Tarrant County Pool Inspections (Web Scraper)",
+      endpoint: "https://poolinspection.tarrantcounty.com",
+      config: {
+        batchSize: 50,
+        timeout: 30000,
+      },
+    },
+    create: {
+      id: "tarrant-county-tx-scraper-source",
+      jurisdictionId: tarrantCounty.id,
+      name: "Tarrant County Pool Inspections (Web Scraper)",
+      adapterType: AdapterType.SCRAPER,
+      endpoint: "https://poolinspection.tarrantcounty.com",
+      isActive: true,
+      config: {
+        batchSize: 50,
+        timeout: 30000,
+      },
+      requestsPerMinute: 20, // Respectful rate limiting for web scraping
+    },
+  });
+  console.log(`Created source: ${tarrantCountySource.name} (${tarrantCountySource.id})`);
+
   // Seed target jurisdictions for coverage tracking
   console.log("\nSeeding target jurisdictions...");
 
