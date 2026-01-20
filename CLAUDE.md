@@ -16,8 +16,8 @@
 | Railway | Deployed, production running |
 | Database | PostgreSQL on Railway (`postgres-8mb0` service) |
 | Live URL | https://poolinspections.us |
-| Total Inspections | 91,499 |
-| Total Facilities | 15,971 |
+| Total Inspections | 92,145 |
+| Total Facilities | 16,618 |
 | Total Jurisdictions | 12 |
 
 **Recent changes (2026-01-20):**
@@ -35,7 +35,7 @@
 | Montgomery County, MD | Socrata | ✅ Active | 10,865 | |
 | Austin, TX | Socrata | ✅ Active | 5,972 | |
 | New York City, NY | Socrata | ✅ Active | 5,747 | |
-| Georgia (statewide) | Tyler | ✅ Active | 5,230 | Backfill in progress |
+| Georgia (statewide) | Tyler | ✅ Active | 5,875 | Backfill in progress |
 | Louisville, KY | ArcGIS | ✅ Active | 3,889 | |
 | Arlington, TX | ArcGIS | ✅ Active | 1,693 | |
 | Houston, TX | Tyler | 🔧 Ready | 358 | Pagination fixed, needs full backfill |
@@ -170,6 +170,13 @@ npm run ingest:backfill -- --source <id> --resume  # Resume from saved cursor
 npm run ingest:daily                                # Run incremental daily sync
 npm run sources:check                               # Check health of all source endpoints
 npm run sources:check -- --fix                      # Check and auto-update database status
+
+# Geocoding
+npm run geocode                          # Geocode all facilities missing coordinates
+npm run geocode -- --limit 100           # Limit to first 100 facilities
+npm run geocode -- --jurisdiction austin-tx  # Specific jurisdiction only
+npm run geocode -- --dry-run             # Preview without DB changes
+npm run geocode -- --resume              # Resume interrupted run
 
 # Discovery
 npm run socrata:discover              # Full run: crawl → filter → import

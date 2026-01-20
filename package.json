@@ -15,6 +15,7 @@
     "ingest:backfill": "tsx scripts/backfill.ts",
     "ingest:daily": "tsx workers/daily-ingestion/index.ts",
     "sources:check": "tsx scripts/check-sources.ts",
+    "geocode": "tsx scripts/geocode-facilities.ts",
     "socrata:discover": "tsx scripts/socrata-discover/index.ts",
     "typecheck": "tsc --noEmit"
   },

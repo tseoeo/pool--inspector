@@ -1,15 +1,15 @@
 # Backfill Status Tracker
 
-> **Last Updated:** 2026-01-20 19:45 EET
-> **Total Inspections in DB:** 91,499
-> **Total Facilities:** 15,971
+> **Last Updated:** 2026-01-20 21:00 EET
+> **Total Inspections in DB:** 92,145
+> **Total Facilities:** 16,618
 > **Total Jurisdictions:** 12
 
 ## Active Backfills
 
 | Source | Task ID | Status | Progress | Estimate | Notes |
 |--------|---------|--------|----------|----------|-------|
-| Georgia | `b2c143b` | ✅ Running | Page 1046 (~95%) | ~1,100 pages | Using `--resume` flag; almost complete |
+| Georgia | `b2c143b` | ✅ Running | 5,875+ records | ~1,200 pages | Using `--resume` flag; nearing completion |
 
 ## Current Database Counts
 
@@ -19,7 +19,7 @@
 | Montgomery County | 10,865 | Socrata API |
 | City of Austin | 5,972 | Socrata API |
 | New York City | 5,747 | Socrata API |
-| State of Georgia | 5,230 | Tyler portal (backfill in progress) |
+| State of Georgia | 5,875 | Tyler portal (backfill in progress) |
 | Louisville Metro | 3,889 | ArcGIS |
 | City of Arlington | 1,693 | ArcGIS |
 | City of Houston | 358 | Tyler portal (**needs full backfill**) |
