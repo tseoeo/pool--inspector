@@ -7,6 +7,7 @@ async function main() {
   // Parse arguments
   let sourceId: string | undefined;
   let maxRecords: number | undefined;
+  let resume = false;
 
   for (let i = 0; i < args.length; i++) {
     if (args[i] === "--source" && args[i + 1]) {
@@ -15,14 +16,20 @@ async function main() {
     } else if (args[i] === "--max" && args[i + 1]) {
       maxRecords = parseInt(args[i + 1], 10);
       i++;
+    } else if (args[i] === "--resume") {
+      resume = true;
     }
   }
 
   if (!sourceId) {
-    console.error("Usage: npm run ingest:backfill -- --source <sourceId> [--max <records>]");
+    console.error("Usage: npm run ingest:backfill -- --source <sourceId> [--max <records>] [--resume]");
+    console.error("\nOptions:");
+    console.error("  --source <id>  Source ID to backfill (required)");
+    console.error("  --max <n>      Maximum records to fetch");
+    console.error("  --resume       Resume from saved cursor instead of starting fresh");
     console.error("\nExample:");
     console.error("  npm run ingest:backfill -- --source austin-socrata-source");
-    console.error("  npm run ingest:backfill -- --source webster-arcgis-source --max 100");
+    console.error("  npm run ingest:backfill -- --source georgia-statewide-tyler-source --resume");
     process.exit(1);
   }
 
@@ -30,13 +37,16 @@ async function main() {
   if (maxRecords) {
     console.log(`Max records: ${maxRecords}`);
   }
+  if (resume) {
+    console.log(`Resuming from saved cursor`);
+  }
 
   const startTime = Date.now();
 
   try {
     const result = await runIngestion({
       sourceId,
-      syncType: "BACKFILL",
+      syncType: resume ? "RESUME" : "BACKFILL",
       maxRecords,
     });
 

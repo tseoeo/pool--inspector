@@ -407,4 +407,5 @@ enum SyncType {
   BACKFILL
   INCREMENTAL
   MANUAL
+  RESUME
 }

@@ -34,10 +34,16 @@ export async function runIngestion(options: IngestionOptions): Promise<Ingestion
     },
   });
 
-  let cursor: CursorState | null =
-    syncType === "BACKFILL"
-      ? adapter.getInitialCursor()
-      : adapter.getIncrementalCursor(source.lastSyncAt);
+  let cursor: CursorState | null;
+  if (syncType === "BACKFILL") {
+    cursor = adapter.getInitialCursor();
+  } else if (syncType === "RESUME" && source.cursor) {
+    // Resume from saved cursor position
+    cursor = source.cursor as CursorState;
+    console.log(`Resuming from saved cursor:`, cursor);
+  } else {
+    cursor = adapter.getIncrementalCursor(source.lastSyncAt);
+  }
 
   const cursorBefore = cursor ? JSON.parse(JSON.stringify(cursor)) : null;
   let totalFetched = 0;

@@ -7,7 +7,7 @@
 
 | Source | Task ID | Status | Progress | Estimate | Notes |
 |--------|---------|--------|----------|----------|-------|
-| None currently active | | | | | Railway DB dropping connections; restart after stabilizes |
+| Georgia | `bb991c3` | ✅ Running | Page 34+ | ~1,100 pages | Using new `--resume` flag to continue from saved cursor |
 
 ## Estimates
 
