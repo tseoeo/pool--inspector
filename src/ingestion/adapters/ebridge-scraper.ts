@@ -6,8 +6,23 @@
  *
  * Currently supports: Hillsborough County, FL
  *
- * eBridge is a document management system that stores inspection PDFs.
- * This scraper extracts the index data (facility info, dates) from search results.
+ * eBridge is a document management system that stores ALL permit-related documents:
+ * - Inspection reports
+ * - Applications
+ * - Correspondence
+ * - Complaints
+ * - Enforcement notices
+ *
+ * Config options:
+ * - documentTypes: string[] - Filter to specific document types (e.g., ["Inspection"])
+ *   If not set, all document types are fetched (can be 100x more records!)
+ *
+ * Example config:
+ * {
+ *   "fileCabinet": "HCHD",
+ *   "program": "Swimming Pool",
+ *   "documentTypes": ["Inspection"]  // Only fetch actual inspections
+ * }
  */
 
 import type { Source } from "@prisma/client";
@@ -24,6 +39,7 @@ interface EbridgeConfig {
   password: string;
   fileCabinet: string;
   program: string; // e.g., "Swimming Pool"
+  documentTypes?: string[]; // Filter to specific types: ["Inspection"], ["Inspection", "Enforcement"], etc.
   batchSize: number;
   timeout: number;
   retryAttempts: number;
@@ -58,6 +74,7 @@ export class EbridgeScraperAdapter extends BaseAdapter {
       password: (config.password as string) || DEFAULT_CONFIG.password!,
       fileCabinet: (config.fileCabinet as string) || '',
       program: (config.program as string) || 'Swimming Pool',
+      documentTypes: config.documentTypes as string[] | undefined, // undefined = all types
       batchSize: (config.batchSize as number) || DEFAULT_CONFIG.batchSize!,
       timeout: (config.timeout as number) || DEFAULT_CONFIG.timeout!,
       retryAttempts: (config.retryAttempts as number) || 3,
@@ -224,6 +241,9 @@ export class EbridgeScraperAdapter extends BaseAdapter {
       }
 
       // Extract records
+      let skippedByFilter = 0;
+      const docTypeCounts: Record<string, number> = {};
+
       for (let i = startIndex; i < allRows.length && records.length < this.config.batchSize; i++) {
         try {
           const row = allRows[i];
@@ -242,6 +262,21 @@ export class EbridgeScraperAdapter extends BaseAdapter {
 
           // Skip if no valid permit number
           if (!permitNumber || permitNumber === 'Permit number') continue;
+
+          // Track document type counts for logging
+          docTypeCounts[docType || 'Unknown'] = (docTypeCounts[docType || 'Unknown'] || 0) + 1;
+
+          // Filter by document type if configured
+          if (this.config.documentTypes && this.config.documentTypes.length > 0) {
+            const normalizedDocType = docType?.toLowerCase().trim() || '';
+            const matchesFilter = this.config.documentTypes.some(
+              t => normalizedDocType.includes(t.toLowerCase())
+            );
+            if (!matchesFilter) {
+              skippedByFilter++;
+              continue; // Skip non-matching document types
+            }
+          }
 
           const externalId = `ebridge-${this.config.fileCabinet}-${permitNumber}-${docDate}`.replace(/\s+/g, '-');
 
@@ -264,7 +299,14 @@ export class EbridgeScraperAdapter extends BaseAdapter {
         }
       }
 
-      console.log(`Extracted ${records.length} records`);
+      // Log extraction results with filter info
+      if (this.config.documentTypes?.length) {
+        console.log(`Extracted ${records.length} records (filtered to: ${this.config.documentTypes.join(', ')})`);
+        console.log(`  Skipped ${skippedByFilter} records not matching filter`);
+        console.log(`  Document types found:`, docTypeCounts);
+      } else {
+        console.log(`Extracted ${records.length} records (all document types)`);
+      }
 
       // Determine if there are more results
       // eBridge shows all results on one page (up to 1000), so we need to check pagination
@@ -283,6 +325,9 @@ export class EbridgeScraperAdapter extends BaseAdapter {
           fetchedAt: new Date(),
           program: this.config.program,
           fileCabinet: this.config.fileCabinet,
+          documentTypesFilter: this.config.documentTypes || 'all',
+          skippedByFilter,
+          docTypeCounts,
         },
       };
 

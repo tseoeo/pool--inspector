@@ -7,7 +7,7 @@
 
 ## Current Status
 
-**Last updated:** 2026-01-20
+**Last updated:** 2026-01-21
 
 | Item | Status |
 |------|--------|
@@ -16,9 +16,17 @@
 | Railway | Deployed, production running |
 | Database | PostgreSQL on Railway (`postgres-8mb0` service) |
 | Live URL | https://poolinspections.us |
-| Total Inspections | 92,145 |
-| Total Facilities | 16,618 |
-| Total Jurisdictions | 12 |
+| Total Inspections | 93,957 |
+| Total Facilities | 18,388 |
+| Total Jurisdictions | 13 |
+| Geocoded Facilities | 72% (13,235/18,388) |
+
+**Recent changes (2026-01-21):**
+- Completed Georgia statewide backfill (7,594 inspections, 7,433 facilities)
+- Added Hillsborough County FL eBridge scraper (93 inspections)
+- Added geocoding script using Nominatim API (free OSM geocoder)
+- Geocoded 72% of facilities (up from ~45%)
+- Added overnight runner script with auto-retry for long backfills
 
 **Recent changes (2026-01-20):**
 - Added Houston scraper (Tyler Technologies portal)
@@ -33,21 +41,23 @@
 |--------|------|--------|---------|-------|
 | Maricopa County, AZ | API | ✅ Active | 57,124 | Largest dataset |
 | Montgomery County, MD | Socrata | ✅ Active | 10,865 | |
+| Georgia (statewide) | Tyler | ✅ Active | 7,594 | Backfill complete |
 | Austin, TX | Socrata | ✅ Active | 5,972 | |
 | New York City, NY | Socrata | ✅ Active | 5,747 | |
-| Georgia (statewide) | Tyler | ✅ Active | 5,875 | Backfill in progress |
 | Louisville, KY | ArcGIS | ✅ Active | 3,889 | |
 | Arlington, TX | ArcGIS | ✅ Active | 1,693 | |
 | Houston, TX | Tyler | 🔧 Ready | 358 | Pagination fixed, needs full backfill |
 | Tarrant County, TX | Playwright | ✅ Active | 291 | |
 | Jackson County, OR | ArcGIS | ✅ Active | 207 | |
 | Los Angeles County, CA | Playwright | 🔧 Ready | 100 | Pagination fixed, needs full backfill |
+| Hillsborough County, FL | eBridge | ✅ Active | 93 | Document management system |
 | Webster, TX | ArcGIS | ❌ Inactive | 24 | Server offline |
 
 **Next steps:**
+- Complete geocoding (~3,700 facilities remaining)
 - Run full Houston backfill (~3,500 records)
 - Run full LA County backfill (~300 records)
-- Add more jurisdictions/data sources (check `/coverage` for targets)
+- Add more Florida counties via eBridge
 - Frontend improvements
 
 ---
