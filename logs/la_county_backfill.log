@@ -1,0 +1,137 @@
+[Wed Jan 21 07:21:57 EET 2026] Starting LA County backfill...
+
+> pool-inspection@0.1.0 ingest:backfill
+> tsx scripts/backfill.ts --source la-county-ca-scraper-source --resume
+
+Starting backfill for source: la-county-ca-scraper-source
+Resuming from saved cursor
+Resuming from saved cursor: {
+  type: 'objectid',
+  value: '{"pageIndex":1,"facilityIndex":0,"totalProcessed":100}'
+}
+Fetching batch from cursor: {
+  type: 'objectid',
+  value: '{"pageIndex":1,"facilityIndex":0,"totalProcessed":100}'
+}
+Fetching LA County page 2, facility index 0
+Navigating to: https://ehservices.publichealth.lacounty.gov/servlet/guest?service=1&enterprise=1&qbItem=5
+Redirected to: https://ehservices.publichealth.lacounty.gov/ezsearch
+Results table loaded
+Navigating to page 2...
+Now on page 2
+Found 102 rows in data table
+Parsed 100 facilities on page 2
+Has next page: true
+Fetched 10 records (total: 10)
+Fetching batch from cursor: {
+  type: 'objectid',
+  value: '{"pageIndex":1,"facilityIndex":10,"totalProcessed":110}'
+}
+Fetching LA County page 2, facility index 10
+Navigating to: https://ehservices.publichealth.lacounty.gov/servlet/guest?service=1&enterprise=1&qbItem=5
+Redirected to: https://ehservices.publichealth.lacounty.gov/ezsearch
+Results table loaded
+Navigating to page 2...
+Now on page 2
+Found 102 rows in data table
+Parsed 100 facilities on page 2
+Has next page: true
+Fetched 10 records (total: 20)
+Fetching batch from cursor: {
+  type: 'objectid',
+  value: '{"pageIndex":1,"facilityIndex":20,"totalProcessed":120}'
+}
+Fetching LA County page 2, facility index 20
+Navigating to: https://ehservices.publichealth.lacounty.gov/servlet/guest?service=1&enterprise=1&qbItem=5
+Redirected to: https://ehservices.publichealth.lacounty.gov/ezsearch
+Results table loaded
+Navigating to page 2...
+Now on page 2
+Found 102 rows in data table
+Parsed 100 facilities on page 2
+Has next page: true
+Fetched 10 records (total: 30)
+Fetching batch from cursor: {
+  type: 'objectid',
+  value: '{"pageIndex":1,"facilityIndex":30,"totalProcessed":130}'
+}
+Fetching LA County page 2, facility index 30
+Navigating to: https://ehservices.publichealth.lacounty.gov/servlet/guest?service=1&enterprise=1&qbItem=5
+Redirected to: https://ehservices.publichealth.lacounty.gov/ezsearch
+Results table loaded
+Navigating to page 2...
+Now on page 2
+Found 102 rows in data table
+Parsed 100 facilities on page 2
+Has next page: true
+Fetched 10 records (total: 40)
+Fetching batch from cursor: {
+  type: 'objectid',
+  value: '{"pageIndex":1,"facilityIndex":40,"totalProcessed":140}'
+}
+Fetching LA County page 2, facility index 40
+Navigating to: https://ehservices.publichealth.lacounty.gov/servlet/guest?service=1&enterprise=1&qbItem=5
+Redirected to: https://ehservices.publichealth.lacounty.gov/ezsearch
+Results table loaded
+Navigating to page 2...
+Now on page 2
+Found 102 rows in data table
+Parsed 100 facilities on page 2
+Has next page: true
+Fetched 10 records (total: 50)
+Fetching batch from cursor: {
+  type: 'objectid',
+  value: '{"pageIndex":1,"facilityIndex":50,"totalProcessed":150}'
+}
+Fetching LA County page 2, facility index 50
+Navigating to: https://ehservices.publichealth.lacounty.gov/servlet/guest?service=1&enterprise=1&qbItem=5
+Redirected to: https://ehservices.publichealth.lacounty.gov/ezsearch
+Results table loaded
+Navigating to page 2...
+Now on page 2
+Found 102 rows in data table
+Parsed 100 facilities on page 2
+Has next page: true
+Fetched 10 records (total: 60)
+Fetching batch from cursor: {
+  type: 'objectid',
+  value: '{"pageIndex":1,"facilityIndex":60,"totalProcessed":160}'
+}
+Fetching LA County page 2, facility index 60
+Navigating to: https://ehservices.publichealth.lacounty.gov/servlet/guest?service=1&enterprise=1&qbItem=5
+Redirected to: https://ehservices.publichealth.lacounty.gov/ezsearch
+Results table loaded
+Navigating to page 2...
+Now on page 2
+Found 102 rows in data table
+Parsed 100 facilities on page 2
+Has next page: true
+Fetched 10 records (total: 70)
+Fetching batch from cursor: {
+  type: 'objectid',
+  value: '{"pageIndex":1,"facilityIndex":70,"totalProcessed":170}'
+}
+Fetching LA County page 2, facility index 70
+Navigating to: https://ehservices.publichealth.lacounty.gov/servlet/guest?service=1&enterprise=1&qbItem=5
+Redirected to: https://ehservices.publichealth.lacounty.gov/ezsearch
+Results table loaded
+Navigating to page 2...
+Now on page 2
+Found 102 rows in data table
+Parsed 100 facilities on page 2
+Has next page: true
+Fetched 10 records (total: 80)
+Fetching batch from cursor: {
+  type: 'objectid',
+  value: '{"pageIndex":1,"facilityIndex":80,"totalProcessed":180}'
+}
+Fetching LA County page 2, facility index 80
+Navigating to: https://ehservices.publichealth.lacounty.gov/servlet/guest?service=1&enterprise=1&qbItem=5
+Redirected to: https://ehservices.publichealth.lacounty.gov/ezsearch
+Results table loaded
+Navigating to page 2...
+Now on page 2
+Found 102 rows in data table
+Parsed 100 facilities on page 2
+Has next page: true
+Fetched 10 records (total: 90)

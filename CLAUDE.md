@@ -16,10 +16,10 @@
 | Railway | Deployed, production running |
 | Database | PostgreSQL on Railway (`postgres-8mb0` service) |
 | Live URL | https://poolinspections.us |
-| Total Inspections | 93,957 |
-| Total Facilities | 18,388 |
+| Total Inspections | 95,315 |
+| Total Facilities | 18,638 |
 | Total Jurisdictions | 13 |
-| Geocoded Facilities | 72% (13,235/18,388) |
+| Geocoded Facilities | 81% (15,102/18,638) |
 
 **Recent changes (2026-01-21):**
 - Completed Georgia statewide backfill (7,594 inspections, 7,433 facilities)
@@ -46,10 +46,10 @@
 | New York City, NY | Socrata | ✅ Active | 5,747 | |
 | Louisville, KY | ArcGIS | ✅ Active | 3,889 | |
 | Arlington, TX | ArcGIS | ✅ Active | 1,693 | |
-| Houston, TX | Tyler | 🔧 Ready | 358 | Pagination fixed, needs full backfill |
+| Houston, TX | Tyler | 🔄 Running | 1,626 | Backfill in progress (~3,500 total) |
 | Tarrant County, TX | Playwright | ✅ Active | 291 | |
 | Jackson County, OR | ArcGIS | ✅ Active | 207 | |
-| Los Angeles County, CA | Playwright | 🔧 Ready | 100 | Pagination fixed, needs full backfill |
+| Los Angeles County, CA | Playwright | 🔄 Running | 170 | Backfill in progress (~300 total) |
 | Hillsborough County, FL | eBridge | ✅ Active | 93 | Document management system |
 | Webster, TX | ArcGIS | ❌ Inactive | 24 | Server offline |
 

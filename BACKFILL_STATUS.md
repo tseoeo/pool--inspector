@@ -1,16 +1,18 @@
 # Backfill Status Tracker
 
-> **Last Updated:** 2026-01-21 07:30 EET
-> **Total Inspections in DB:** 93,957
-> **Total Facilities:** 18,388
+> **Last Updated:** 2026-01-21 09:45 EET
+> **Total Inspections in DB:** 95,315
+> **Total Facilities:** 18,638
 > **Total Jurisdictions:** 13
-> **Geocoded Facilities:** 72% (13,235/18,388)
+> **Geocoded Facilities:** 81% (15,102/18,638)
 
 ## Active Backfills
 
 | Source | Status | Progress | Notes |
 |--------|--------|----------|-------|
-| Geocoding | 🔄 Running | 8,280/12,042 (69%) | ~1 hour remaining at 1 req/sec |
+| Geocoding | 🔄 Running | 10,200/12,042 (85%) | ~30 min remaining |
+| Houston | 🔄 Running | 1,626/~3,500 (46%) | Tyler portal |
+| LA County | 🔄 Running | 170/~300 (57%) | Playwright scraper |
 
 ## Recently Completed (2026-01-21)
 
@@ -50,10 +52,10 @@ The eBridge system is a **document management portal**, not an inspection databa
 | New York City | 1,614 | 5,747 | Socrata API |
 | Louisville Metro | 430 | 3,889 | ArcGIS |
 | City of Arlington | 360 | 1,693 | ArcGIS |
-| City of Houston | 53 | 358 | Tyler portal (**needs full backfill**) |
+| City of Houston | 53 | 1,626 | Tyler portal (backfill running) |
 | Tarrant County | 37 | 291 | Playwright scraper |
 | Jackson County | 167 | 207 | ArcGIS |
-| Los Angeles County | 97 | 100 | Playwright (**needs full backfill**) |
+| Los Angeles County | 97 | 170 | Playwright (backfill running) |
 | Hillsborough County | 72 | 93 | eBridge (document types: Inspection, Application, etc.) |
 | City of Webster | 22 | 24 | ArcGIS (server offline) |
 
@@ -61,9 +63,7 @@ The eBridge system is a **document management portal**, not an inspection databa
 
 | Source | Current | Estimated Total | Status | Notes |
 |--------|---------|-----------------|--------|-------|
-| Houston | 358 | **~3,500+** | 🔧 Ready | Pagination fixed; site has start=3481 |
-| LA County | 100 | **~300** | 🔧 Ready | JS pagination fixed; 3 pages × 100 facilities |
-| Geocoding | 8,280 | 12,042 | 🔄 Running | Nominatim API, ~1 req/sec rate limit |
+| More FL eBridge counties | 0 | ~1,000+ | 🔧 Ready | Miami-Dade, Broward, Palm Beach, Orange |
 
 ## Overnight Runner
 

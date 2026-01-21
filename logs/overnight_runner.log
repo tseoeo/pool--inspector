@@ -1,0 +1,38 @@
+=== Overnight Runner Started at Tue Jan 20 22:01:40 EET 2026 ===
+Logs will be written to logs/
+
+Starting all three processes in parallel...
+
+Process PIDs:
+  Geocode: 51895
+  Georgia: 51896
+  Hillsborough: 51897
+
+To monitor: tail -f logs/*_20260120_220140.log
+To stop all: kill 51895 51896 51897
+
+[hillsborough] Starting... (log: logs/hillsborough_20260120_220140.log)
+[geocode] Starting... (log: logs/geocode_20260120_220140.log)
+[georgia] Starting... (log: logs/georgia_20260120_220140.log)
+[hillsborough] Tue Jan 20 22:01:40 EET 2026: Attempt 1/10
+[georgia] Tue Jan 20 22:01:40 EET 2026: Attempt 1/10
+[geocode] Tue Jan 20 22:01:41 EET 2026: Attempt 1/10
+[hillsborough] Tue Jan 20 22:02:46 EET 2026: Failed (attempt 1/10), waiting 30s before retry...
+[hillsborough] Tue Jan 20 22:03:16 EET 2026: Attempt 2/10
+[hillsborough] Tue Jan 20 22:03:25 EET 2026: Failed (attempt 2/10), waiting 30s before retry...
+[hillsborough] Tue Jan 20 22:03:55 EET 2026: Attempt 3/10
+[georgia] Wed Jan 21 00:25:10 EET 2026: Completed successfully!
+[geocode] Wed Jan 21 02:31:01 EET 2026: Failed (attempt 1/10), waiting 30s before retry...
+[geocode] Wed Jan 21 02:31:31 EET 2026: Attempt 2/10
+[geocode] Wed Jan 21 06:19:11 EET 2026: Failed (attempt 2/10), waiting 30s before retry...
+[geocode] Wed Jan 21 06:19:41 EET 2026: Attempt 3/10
+[geocode] Wed Jan 21 06:19:47 EET 2026: Failed (attempt 3/10), waiting 30s before retry...
+[geocode] Wed Jan 21 06:20:17 EET 2026: Attempt 4/10
+[geocode] Wed Jan 21 07:29:33 EET 2026: Failed (attempt 4/10), waiting 30s before retry...
+[geocode] Wed Jan 21 07:30:03 EET 2026: Attempt 5/10
+[geocode] Wed Jan 21 07:30:11 EET 2026: Failed (attempt 5/10), waiting 30s before retry...
+[geocode] Wed Jan 21 07:30:41 EET 2026: Attempt 6/10
+[geocode] Wed Jan 21 07:30:48 EET 2026: Failed (attempt 6/10), waiting 30s before retry...
+[geocode] Wed Jan 21 07:31:18 EET 2026: Attempt 7/10
+[geocode] Wed Jan 21 09:30:49 EET 2026: Failed (attempt 7/10), waiting 30s before retry...
+[geocode] Wed Jan 21 09:31:19 EET 2026: Attempt 8/10

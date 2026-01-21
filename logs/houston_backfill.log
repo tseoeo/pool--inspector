@@ -1,0 +1,2511 @@
+[Wed Jan 21 07:21:57 EET 2026] Starting Houston backfill...
+
+> pool-inspection@0.1.0 ingest:backfill
+> tsx scripts/backfill.ts --source houston-tx-scraper-source --resume
+
+Starting backfill for source: houston-tx-scraper-source
+Resuming from saved cursor
+Resuming from saved cursor: { type: 'offset', value: '{"start":71,"facilityIndex":0}' }
+Fetching batch from cursor: { type: 'offset', value: '{"start":71,"facilityIndex":0}' }
+Fetching Houston pools from start=71
+Found 10 facilities on page
+Fetched 50 records (total: 50)
+Fetching batch from cursor: { type: 'offset', value: '{"start":81,"facilityIndex":0}' }
+Fetching Houston pools from start=81
+Found 10 facilities on page
+Fetched 51 records (total: 101)
+Fetching batch from cursor: { type: 'offset', value: '{"start":91,"facilityIndex":0}' }
+Fetching Houston pools from start=91
+Found 8 facilities on page
+Error processing facility EE4FFA7C-4D70-40A5-BAFC-9B39F608B239: page.goto: Timeout 30000ms exceeded.
+Call log:
+[2m  - navigating to "https://tx.healthinspections.us/houston/estab.cfm?facilityID=EE4FFA7C-4D70-40A5-BAFC-9B39F608B239", waiting until "networkidle"[22m
+
+    at HoustonScraperAdapter.fetch (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/adapters/houston-scraper.ts:120:22)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:58:22)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  name: 'TimeoutError'
+}
+Fetched 43 records (total: 144)
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Timed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 10, connection limit: 17)
+Failed to process record houston-7AD1A531-B1D4-47B6-BD63-8ED2BF84AF31-01-05-2026: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Timed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 10, connection limit: 17)
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P2024',
+  meta: { modelName: 'RawRecord', connection_limit: 17, timeout: 10 },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-7AD1A531-B1D4-47B6-BD63-8ED2BF84AF31-08-11-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-7AD1A531-B1D4-47B6-BD63-8ED2BF84AF31-03-26-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-7AD1A531-B1D4-47B6-BD63-8ED2BF84AF31-11-04-2024: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-7AD1A531-B1D4-47B6-BD63-8ED2BF84AF31-08-06-2024: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-7AD1A531-B1D4-47B6-BD63-8ED2BF84AF31-08-06-2024: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-7AD1A531-B1D4-47B6-BD63-8ED2BF84AF31-03-06-2024: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-7AD1A531-B1D4-47B6-BD63-8ED2BF84AF31-08-01-2023: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-7AD1A531-B1D4-47B6-BD63-8ED2BF84AF31-03-09-2023: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-7AD1A531-B1D4-47B6-BD63-8ED2BF84AF31-08-23-2022: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-7AD1A531-B1D4-47B6-BD63-8ED2BF84AF31-03-28-2022: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-7AD1A531-B1D4-47B6-BD63-8ED2BF84AF31-03-28-2022: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-7AD1A531-B1D4-47B6-BD63-8ED2BF84AF31-03-17-2021: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-7AD1A531-B1D4-47B6-BD63-8ED2BF84AF31-03-17-2021: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-FD679DAF-44AC-4372-A2C9-033164D5FF8A-06-10-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-FD679DAF-44AC-4372-A2C9-033164D5FF8A-06-20-2024: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-FF98ACBF-A78A-4C69-8FE1-9340A3DD4D50-02-10-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+Fetching batch from cursor: { type: 'offset', value: '{"start":101,"facilityIndex":0}' }
+Fetching Houston pools from start=101
+Found 8 facilities on page
+Fetched 72 records (total: 216)
+Fetching batch from cursor: { type: 'offset', value: '{"start":111,"facilityIndex":0}' }
+Fetching Houston pools from start=111
+Found 7 facilities on page
+Fetched 60 records (total: 276)
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-11-07-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-11-03-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-11-03-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-11-03-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-11-03-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-07-17-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-07-17-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-07-17-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-07-16-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-07-16-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-07-16-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-07-16-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-02-15-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-02-15-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-01-06-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-01-06-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-02-23-2024: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-02-23-2024: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-12-26-2023: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-11-22-2023: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-11-22-2023: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-11-22-2023: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-10-30-2023: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-10-27-2023: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-12-17-2022: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B536382B-BD2E-49C1-B4F1-57BC3A1DE8E8-11-16-2022: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+Fetching batch from cursor: { type: 'offset', value: '{"start":121,"facilityIndex":0}' }
+Fetching Houston pools from start=121
+Found 8 facilities on page
+Fetched 53 records (total: 329)
+Fetching batch from cursor: { type: 'offset', value: '{"start":131,"facilityIndex":0}' }
+Fetching Houston pools from start=131
+Found 10 facilities on page
+Fetched 55 records (total: 384)
+Fetching batch from cursor: { type: 'offset', value: '{"start":141,"facilityIndex":0}' }
+Fetching Houston pools from start=141
+Found 9 facilities on page
+Fetched 58 records (total: 442)
+Fetching batch from cursor: { type: 'offset', value: '{"start":151,"facilityIndex":0}' }
+Fetching Houston pools from start=151
+Found 8 facilities on page
+Fetched 53 records (total: 495)
+Fetching batch from cursor: { type: 'offset', value: '{"start":161,"facilityIndex":0}' }
+Fetching Houston pools from start=161
+Found 9 facilities on page
+Fetched 46 records (total: 541)
+Fetching batch from cursor: { type: 'offset', value: '{"start":171,"facilityIndex":0}' }
+Fetching Houston pools from start=171
+Found 9 facilities on page
+Fetched 31 records (total: 572)
+Fetching batch from cursor: { type: 'offset', value: '{"start":181,"facilityIndex":0}' }
+Fetching Houston pools from start=181
+Found 9 facilities on page
+Fetched 54 records (total: 626)
+Fetching batch from cursor: { type: 'offset', value: '{"start":191,"facilityIndex":0}' }
+Fetching Houston pools from start=191
+Found 8 facilities on page
+Fetched 50 records (total: 676)
+Fetching batch from cursor: { type: 'offset', value: '{"start":201,"facilityIndex":0}' }
+Fetching Houston pools from start=201
+Found 9 facilities on page
+Fetched 43 records (total: 719)
+Fetching batch from cursor: { type: 'offset', value: '{"start":211,"facilityIndex":0}' }
+Fetching Houston pools from start=211
+Found 8 facilities on page
+Fetched 51 records (total: 770)
+Fetching batch from cursor: { type: 'offset', value: '{"start":221,"facilityIndex":0}' }
+Fetching Houston pools from start=221
+Found 8 facilities on page
+Fetched 50 records (total: 820)
+Fetching batch from cursor: { type: 'offset', value: '{"start":231,"facilityIndex":0}' }
+Fetching Houston pools from start=231
+Found 9 facilities on page
+Fetched 51 records (total: 871)
+Fetching batch from cursor: { type: 'offset', value: '{"start":241,"facilityIndex":0}' }
+Fetching Houston pools from start=241
+Found 10 facilities on page
+Fetched 52 records (total: 923)
+Fetching batch from cursor: { type: 'offset', value: '{"start":251,"facilityIndex":0}' }
+Fetching Houston pools from start=251
+Found 9 facilities on page
+Fetched 51 records (total: 974)
+Fetching batch from cursor: { type: 'offset', value: '{"start":261,"facilityIndex":0}' }
+Fetching Houston pools from start=261
+Found 10 facilities on page
+Fetched 48 records (total: 1022)
+Fetching batch from cursor: { type: 'offset', value: '{"start":271,"facilityIndex":0}' }
+Fetching Houston pools from start=271
+Found 9 facilities on page
+Fetched 52 records (total: 1074)
+Fetching batch from cursor: { type: 'offset', value: '{"start":281,"facilityIndex":0}' }
+Fetching Houston pools from start=281
+Found 8 facilities on page
+Fetched 53 records (total: 1127)
+Fetching batch from cursor: { type: 'offset', value: '{"start":291,"facilityIndex":0}' }
+Fetching Houston pools from start=291
+Found 8 facilities on page
+Fetched 56 records (total: 1183)
+Fetching batch from cursor: { type: 'offset', value: '{"start":301,"facilityIndex":0}' }
+Fetching Houston pools from start=301
+Found 8 facilities on page
+Fetched 50 records (total: 1233)
+Fetching batch from cursor: { type: 'offset', value: '{"start":311,"facilityIndex":0}' }
+Fetching Houston pools from start=311
+Found 7 facilities on page
+Fetched 60 records (total: 1293)
+Fetching batch from cursor: { type: 'offset', value: '{"start":321,"facilityIndex":0}' }
+Fetching Houston pools from start=321
+Found 8 facilities on page
+Fetched 41 records (total: 1334)
+Fetching batch from cursor: { type: 'offset', value: '{"start":331,"facilityIndex":0}' }
+Fetching Houston pools from start=331
+Found 8 facilities on page
+Fetched 50 records (total: 1384)
+Fetching batch from cursor: { type: 'offset', value: '{"start":341,"facilityIndex":0}' }
+Fetching Houston pools from start=341
+Found 8 facilities on page
+Fetched 52 records (total: 1436)
+Fetching batch from cursor: { type: 'offset', value: '{"start":351,"facilityIndex":0}' }
+Fetching Houston pools from start=351
+Found 9 facilities on page
+Fetched 46 records (total: 1482)
+Fetching batch from cursor: { type: 'offset', value: '{"start":361,"facilityIndex":0}' }
+Fetching Houston pools from start=361
+Found 10 facilities on page
+Fetched 42 records (total: 1524)
+prisma:error 
+Invalid `prisma.inspectionEvent.count()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:393:57
+
+  390 });
+  391 
+  392 // Count total inspections
+→ 393 const totalInspections = await prisma.inspectionEvent.count(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-B7C11A47-5A3D-429B-A25A-B0E0F6DF8EC7-01-30-2023: PrismaClientKnownRequestError: 
+Invalid `prisma.inspectionEvent.count()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:393:57
+
+  390 });
+  391 
+  392 // Count total inspections
+→ 393 const totalInspections = await prisma.inspectionEvent.count(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async updateFacilityStats (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:393:28)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:259:3)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'InspectionEvent',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Timed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 10, connection limit: 17)
+Failed to process record houston-B7C11A47-5A3D-429B-A25A-B0E0F6DF8EC7-01-25-2022: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Timed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 10, connection limit: 17)
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P2024',
+  meta: { modelName: 'RawRecord', connection_limit: 17, timeout: 10 },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-7F912037-FBAD-496E-BE7A-4BB235FA7452-07-24-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-7F912037-FBAD-496E-BE7A-4BB235FA7452-03-25-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-7F912037-FBAD-496E-BE7A-4BB235FA7452-02-01-2024: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-7F912037-FBAD-496E-BE7A-4BB235FA7452-01-30-2023: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-7F912037-FBAD-496E-BE7A-4BB235FA7452-01-25-2022: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-20D89E60-EF14-46A6-B231-1262669B6E62-01-24-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-20D89E60-EF14-46A6-B231-1262669B6E62-01-02-2024: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-20D89E60-EF14-46A6-B231-1262669B6E62-01-30-2023: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-20D89E60-EF14-46A6-B231-1262669B6E62-01-25-2022: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-39CF510D-4DA7-42EE-8392-44C70D76C139-01-24-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-39CF510D-4DA7-42EE-8392-44C70D76C139-01-04-2024: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-39CF510D-4DA7-42EE-8392-44C70D76C139-01-30-2023: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-6D27EC34-9826-454B-85BB-F83B800F26F3-01-24-2025: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-6D27EC34-9826-454B-85BB-F83B800F26F3-01-04-2024: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-6D27EC34-9826-454B-85BB-F83B800F26F3-01-30-2023: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Failed to process record houston-6D27EC34-9826-454B-85BB-F83B800F26F3-01-25-2022: PrismaClientKnownRequestError: 
+Invalid `prisma.rawRecord.findUnique()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:43
+
+  173 const payloadHash = hashPayload(canonical.rawPayload);
+  174 
+  175 // Check if we already have this record
+→ 176 const existing = await prisma.rawRecord.findUnique(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:176:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'RawRecord',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+prisma:error 
+Invalid `prisma.source.update()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:78:29
+
+  75 
+  76 // Update source cursor
+  77 if (result.nextCursor) {
+→ 78   await prisma.source.update(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+prisma:error 
+Invalid `prisma.syncLog.update()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:133:26
+
+  130 const errorMessage = error instanceof Error ? error.message : String(error);
+  131 const errorStack = error instanceof Error ? error.stack : undefined;
+  132 
+→ 133 await prisma.syncLog.update(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Backfill failed: PrismaClientKnownRequestError: 
+Invalid `prisma.syncLog.update()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:133:26
+
+  130 const errorMessage = error instanceof Error ? error.message : String(error);
+  131 const errorStack = error instanceof Error ? error.stack : undefined;
+  132 
+→ 133 await prisma.syncLog.update(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:133:5)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1001',
+  meta: {
+    modelName: 'SyncLog',
+    database_location: 'shuttle.proxy.rlwy.net:40617'
+  },
+  clientVersion: '6.19.2'
+}
+[Wed Jan 21 09:02:20 EET 2026] Houston failed (exit 1), retrying in 30s...
+[Wed Jan 21 09:02:51 EET 2026] Starting Houston backfill...
+
+> pool-inspection@0.1.0 ingest:backfill
+> tsx scripts/backfill.ts --source houston-tx-scraper-source --resume
+
+Starting backfill for source: houston-tx-scraper-source
+Resuming from saved cursor
+prisma:error 
+Invalid `prisma.source.findUniqueOrThrow()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:20:38
+
+  17 export async function runIngestion(options: IngestionOptions): Promise<IngestionResult> {
+  18   const { sourceId, syncType, maxRecords } = options;
+  19 
+→ 20   const source = await prisma.source.findUniqueOrThrow(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Backfill failed: PrismaClientInitializationError: 
+Invalid `prisma.source.findUniqueOrThrow()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:20:38
+
+  17 export async function runIngestion(options: IngestionOptions): Promise<IngestionResult> {
+  18   const { sourceId, syncType, maxRecords } = options;
+  19 
+→ 20   const source = await prisma.source.findUniqueOrThrow(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:20:18)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  clientVersion: '6.19.2',
+  errorCode: undefined,
+  retryable: undefined
+}
+[Wed Jan 21 09:14:44 EET 2026] Houston failed (exit 1), retrying in 30s...
+[Wed Jan 21 09:15:14 EET 2026] Starting Houston backfill...
+
+> pool-inspection@0.1.0 ingest:backfill
+> tsx scripts/backfill.ts --source houston-tx-scraper-source --resume
+
+Starting backfill for source: houston-tx-scraper-source
+Resuming from saved cursor
+prisma:error 
+Invalid `prisma.source.findUniqueOrThrow()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:20:38
+
+  17 export async function runIngestion(options: IngestionOptions): Promise<IngestionResult> {
+  18   const { sourceId, syncType, maxRecords } = options;
+  19 
+→ 20   const source = await prisma.source.findUniqueOrThrow(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Backfill failed: PrismaClientInitializationError: 
+Invalid `prisma.source.findUniqueOrThrow()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:20:38
+
+  17 export async function runIngestion(options: IngestionOptions): Promise<IngestionResult> {
+  18   const { sourceId, syncType, maxRecords } = options;
+  19 
+→ 20   const source = await prisma.source.findUniqueOrThrow(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:20:18)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  clientVersion: '6.19.2',
+  errorCode: undefined,
+  retryable: undefined
+}
+[Wed Jan 21 09:29:51 EET 2026] Houston failed (exit 1), retrying in 30s...
+[Wed Jan 21 09:30:25 EET 2026] Starting Houston backfill...
+
+> pool-inspection@0.1.0 ingest:backfill
+> tsx scripts/backfill.ts --source houston-tx-scraper-source --resume
+
+Starting backfill for source: houston-tx-scraper-source
+Resuming from saved cursor
+prisma:error 
+Invalid `prisma.source.findUniqueOrThrow()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:20:38
+
+  17 export async function runIngestion(options: IngestionOptions): Promise<IngestionResult> {
+  18   const { sourceId, syncType, maxRecords } = options;
+  19 
+→ 20   const source = await prisma.source.findUniqueOrThrow(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+Backfill failed: PrismaClientInitializationError: 
+Invalid `prisma.source.findUniqueOrThrow()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:20:38
+
+  17 export async function runIngestion(options: IngestionOptions): Promise<IngestionResult> {
+  18   const { sourceId, syncType, maxRecords } = options;
+  19 
+→ 20   const source = await prisma.source.findUniqueOrThrow(
+Can't reach database server at `shuttle.proxy.rlwy.net:40617`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:40617`.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:20:18)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  clientVersion: '6.19.2',
+  errorCode: undefined,
+  retryable: undefined
+}
+[Wed Jan 21 09:31:14 EET 2026] Houston failed (exit 1), retrying in 30s...
+[Wed Jan 21 09:31:44 EET 2026] Starting Houston backfill...
+
+> pool-inspection@0.1.0 ingest:backfill
+> tsx scripts/backfill.ts --source houston-tx-scraper-source --resume
+
+Starting backfill for source: houston-tx-scraper-source
+Resuming from saved cursor
+Resuming from saved cursor: { type: 'offset', value: '{"start":361,"facilityIndex":0}' }
+Fetching batch from cursor: { type: 'offset', value: '{"start":361,"facilityIndex":0}' }
+Fetching Houston pools from start=361
+Found 10 facilities on page
+Fetched 42 records (total: 42)
+Fetching batch from cursor: { type: 'offset', value: '{"start":371,"facilityIndex":0}' }
+Fetching Houston pools from start=371
+Found 10 facilities on page
+Fetched 50 records (total: 92)
+Fetching batch from cursor: { type: 'offset', value: '{"start":381,"facilityIndex":0}' }
+Fetching Houston pools from start=381
+Found 9 facilities on page
+Fetched 47 records (total: 139)
+Fetching batch from cursor: { type: 'offset', value: '{"start":391,"facilityIndex":0}' }
+Fetching Houston pools from start=391
+Found 10 facilities on page

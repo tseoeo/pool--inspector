@@ -1,0 +1,132 @@
+[georgia] Tue Jan 20 22:01:40 EET 2026: Attempt 1/10
+
+> pool-inspection@0.1.0 ingest:backfill
+> tsx scripts/backfill.ts --source georgia-statewide-tyler-source --resume
+
+Starting backfill for source: georgia-statewide-tyler-source
+Resuming from saved cursor
+Resuming from saved cursor: { type: 'offset', value: 1478 }
+Fetching batch from cursor: { type: 'offset', value: 1478 }
+Fetched 5 records (total: 5)
+Fetching batch from cursor: { type: 'offset', value: 1479 }
+Fetched 5 records (total: 10)
+prisma:error Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma:error 
+Invalid `prisma.facility.create()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:319:34
+
+  316 });
+  317 
+  318 try {
+→ 319   return await prisma.facility.create(
+Server has closed the connection.
+Failed to process record NTI3NjU1_12-09-2024: PrismaClientKnownRequestError: 
+Invalid `prisma.facility.create()` invocation in
+/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:319:34
+
+  316 });
+  317 
+  318 try {
+→ 319   return await prisma.facility.create(
+Server has closed the connection.
+    at ei.handleRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+    at ei.request (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+    at async a (/Users/ivandimitrov/Projects/pool--inspector/node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+    at async findOrCreateFacility (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:319:12)
+    at async processRecord (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:217:20)
+    at async runIngestion (/Users/ivandimitrov/Projects/pool--inspector/src/ingestion/index.ts:66:27)
+    at async main (/Users/ivandimitrov/Projects/pool--inspector/scripts/backfill.ts:47:20) {
+  code: 'P1017',
+  meta: { modelName: 'Facility' },
+  clientVersion: '6.19.2'
+}
+Fetching batch from cursor: { type: 'offset', value: 1480 }
+Fetched 5 records (total: 15)
+Fetching batch from cursor: { type: 'offset', value: 1481 }
+Fetched 5 records (total: 20)
+Fetching batch from cursor: { type: 'offset', value: 1482 }
+Fetched 5 records (total: 25)
+Fetching batch from cursor: { type: 'offset', value: 1483 }
+Fetched 5 records (total: 30)
+Fetching batch from cursor: { type: 'offset', value: 1484 }
+Fetched 5 records (total: 35)
+Fetching batch from cursor: { type: 'offset', value: 1485 }
+Fetched 5 records (total: 40)
+Fetching batch from cursor: { type: 'offset', value: 1486 }
+Fetched 5 records (total: 45)
+Fetching batch from cursor: { type: 'offset', value: 1487 }
+Fetched 5 records (total: 50)
+Fetching batch from cursor: { type: 'offset', value: 1488 }
+Fetched 5 records (total: 55)
+Fetching batch from cursor: { type: 'offset', value: 1489 }
+Fetched 5 records (total: 60)
+Fetching batch from cursor: { type: 'offset', value: 1490 }
+Fetched 5 records (total: 65)
+Fetching batch from cursor: { type: 'offset', value: 1491 }
+Fetched 5 records (total: 70)
+Fetching batch from cursor: { type: 'offset', value: 1492 }
+Fetched 5 records (total: 75)
+Fetching batch from cursor: { type: 'offset', value: 1493 }
+Fetched 5 records (total: 80)
+Fetching batch from cursor: { type: 'offset', value: 1494 }
+Fetched 5 records (total: 85)
+Fetching batch from cursor: { type: 'offset', value: 1495 }
+Fetched 5 records (total: 90)
+Fetching batch from cursor: { type: 'offset', value: 1496 }
+Fetched 5 records (total: 95)
+Fetching batch from cursor: { type: 'offset', value: 1497 }
+Fetched 5 records (total: 100)
+Fetching batch from cursor: { type: 'offset', value: 1498 }
+Fetched 5 records (total: 105)
+Fetching batch from cursor: { type: 'offset', value: 1499 }
+Fetched 5 records (total: 110)
+Fetching batch from cursor: { type: 'offset', value: 1500 }
+Fetched 5 records (total: 115)
+Fetching batch from cursor: { type: 'offset', value: 1501 }
+Fetched 5 records (total: 120)
+Fetching batch from cursor: { type: 'offset', value: 1502 }
+Fetched 5 records (total: 125)
+Fetching batch from cursor: { type: 'offset', value: 1503 }
+Fetched 5 records (total: 130)
+Fetching batch from cursor: { type: 'offset', value: 1504 }
+Fetched 5 records (total: 135)
+Fetching batch from cursor: { type: 'offset', value: 1505 }
+Fetched 5 records (total: 140)
+Fetching batch from cursor: { type: 'offset', value: 1506 }
+Fetched 5 records (total: 145)
+Fetching batch from cursor: { type: 'offset', value: 1507 }
+Fetched 5 records (total: 150)
+Fetching batch from cursor: { type: 'offset', value: 1508 }
+Fetched 5 records (total: 155)
+Fetching batch from cursor: { type: 'offset', value: 1509 }
+Fetched 5 records (total: 160)
+Fetching batch from cursor: { type: 'offset', value: 1510 }
+Fetched 5 records (total: 165)
+Fetching batch from cursor: { type: 'offset', value: 1511 }
+Fetched 5 records (total: 170)
+Fetching batch from cursor: { type: 'offset', value: 1512 }
+Fetched 5 records (total: 175)
+Fetching batch from cursor: { type: 'offset', value: 1513 }
+Fetched 5 records (total: 180)
+Fetching batch from cursor: { type: 'offset', value: 1514 }
+Fetched 5 records (total: 185)
+Fetching batch from cursor: { type: 'offset', value: 1515 }
+Fetched 5 records (total: 190)
+Fetching batch from cursor: { type: 'offset', value: 1516 }
+Fetched 5 records (total: 195)
+Fetching batch from cursor: { type: 'offset', value: 1517 }
+Fetched 5 records (total: 200)
+Fetching batch from cursor: { type: 'offset', value: 1518 }
+Fetched 5 records (total: 205)
+Fetching batch from cursor: { type: 'offset', value: 1519 }
+Fetched 0 records (total: 205)
+
+=== Backfill Complete ===
+Duration: 8603.1s
+Records fetched: 205
+Records created: 199
+Records updated: 0
+Records skipped: 5
+Records failed: 1
+[georgia] Wed Jan 21 00:25:10 EET 2026: Completed successfully!
