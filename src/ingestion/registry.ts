@@ -22,6 +22,11 @@ import { transformJacksonCountyOR } from "./transformers/jackson-county-or";
 import { transformTarrantCounty } from "./transformers/tarrant-county";
 import { transformHouston } from "./transformers/houston";
 import { transformHillsborough } from "./transformers/hillsborough";
+import { transformPinellas } from "./transformers/pinellas";
+import { transformSanDiego } from "./transformers/san-diego";
+import { SanDiegoScraperAdapter } from "./adapters/san-diego-scraper";
+import { MecklenburgScraperAdapter } from "./adapters/mecklenburg-scraper";
+import { transformMecklenburg } from "./transformers/mecklenburg";
 
 type AdapterClass = new (source: Source) => BaseAdapter;
 
@@ -48,6 +53,9 @@ const transformerMap: Record<string, TransformerFunction> = {
   "tarrant-county-tx": transformTarrantCounty,
   "houston-tx": transformHouston,
   "hillsborough-county-fl": transformHillsborough,
+  "pinellas-county-fl": transformPinellas,
+  "san-diego-county-ca": transformSanDiego,
+  "mecklenburg-county-nc": transformMecklenburg,
 };
 
 // Map specific source IDs to scraper adapters (for SCRAPER type sources)
@@ -58,6 +66,9 @@ const scraperMap: Record<string, new (source: Source) => BaseAdapter> = {
   "tarrant-county-tx-scraper-source": TarrantScraperAdapter,
   "houston-tx-scraper-source": HoustonScraperAdapter,
   "hillsborough-county-fl-ebridge-source": EbridgeScraperAdapter,
+  "pinellas-county-fl-ebridge-source": EbridgeScraperAdapter,
+  "san-diego-county-ca-scraper-source": SanDiegoScraperAdapter,
+  "mecklenburg-county-nc-scraper-source": MecklenburgScraperAdapter,
 };
 
 export function getAdapter(source: Source): BaseAdapter {

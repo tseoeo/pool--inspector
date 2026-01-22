@@ -16,6 +16,8 @@
     "ingest:daily": "tsx workers/daily-ingestion/index.ts",
     "sources:check": "tsx scripts/check-sources.ts",
     "geocode": "tsx scripts/geocode-facilities.ts",
+    "places:test": "tsx scripts/test-google-places.ts",
+    "places:enrich": "tsx scripts/enrich-facilities.ts",
     "socrata:discover": "tsx scripts/socrata-discover/index.ts",
     "typecheck": "tsc --noEmit"
   },

@@ -157,6 +157,25 @@ model Facility {
   lastInspectionResult String?
   totalInspections     Int        @default(0)
 
+  // Google Places enrichment
+  googlePlaceId        String?    // Google's unique Place ID
+  googleMatchDistance  Float?     // Distance in meters between our coords and Google's
+  googleRating         Float?     // 1.0 - 5.0
+  googleReviewCount    Int?
+  googleReviews        Json?      // Array of { rating, text, author, date }
+  googlePhone          String?
+  googleWebsite        String?
+  googleHours          Json?      // { weekdayText: string[], openNow?: boolean }
+  googlePhotos         Json?      // Array of photo references
+  googleTypes          String[]   // e.g., ["swimming_pool", "sports_complex"]
+  goodForChildren      Boolean?
+  goodForGroups        Boolean?
+  wheelchairAccessible Boolean?
+  allowsDogs           Boolean?
+  restroom             Boolean?
+  googleEditorialSummary String?
+  googleEnrichedAt     DateTime?
+
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
 
@@ -171,6 +190,7 @@ model Facility {
   @@index([latitude, longitude])
   @@index([slug])
   @@index([city, state])
+  @@index([googlePlaceId])
 }
 
 enum FacilityType {

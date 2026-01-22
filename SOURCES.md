@@ -1,197 +1,286 @@
 # Pool Inspection Data Sources
 
-> **Last Updated:** 2026-01-20
->
-> This file tracks all known and potential pool inspection data sources, their integration status, and notes on accessibility.
+> **Last Updated:** 2026-01-21
+> **Total Target Jurisdictions:** 247
+> **Currently Integrated:** 19
 
-## Summary
+## Quick Summary
 
 | Status | Count |
 |--------|-------|
-| **Active** | 11 |
-| **Inactive** | 1 |
-| **Blocked** | 3 |
-| **Potential** | 14+ |
+| **Integrated** | 19 targets (16 jurisdictions) |
+| **Researched (no public data)** | 15+ |
+| **Not researched** | 200+ |
+
+### Active Sources by Type
+
+| Type | Count | Examples |
+|------|-------|----------|
+| Socrata API | 3 | Austin, NYC, Montgomery MD |
+| ArcGIS | 4 | Louisville, Arlington, Jackson County, Webster |
+| Tyler/MHD Scraper | 2 | Georgia statewide, Houston |
+| Playwright Scraper | 4 | Maricopa, LA County, Tarrant, San Diego |
+| eBridge Scraper | 2 | Hillsborough FL, Pinellas FL |
+| NC CDP Portal | 1 | Mecklenburg NC |
 
 ---
 
-## Active Sources
+## Coverage by State
 
-Sources that are integrated and working.
+### Arizona (AZ) - 6 targets
+| Jurisdiction | Status | Source Type | Records | Notes |
+|--------------|--------|-------------|---------|-------|
+| Maricopa County | ✅ | API Scraper | 57,124 | Largest dataset |
+| Mesa | ✅ | - | - | Covered by Maricopa |
+| Phoenix | ✅ | - | - | Covered by Maricopa |
+| Pima County | ⬜ | | | |
+| Scottsdale | ✅ | - | - | Covered by Maricopa |
+| Tucson | ⬜ | | | |
 
-| Jurisdiction | Type | Adapter | Records | Notes |
-|-------------|------|---------|---------|-------|
-| Austin, TX | Socrata | `SocrataAdapter` | ~6,000 insp | Stable, good data quality |
-| Montgomery County, MD | Socrata | `SocrataAdapter` | ~11,000 insp | Slow API (~10s response) |
-| New York City, NY | Socrata | `SocrataAdapter` | ~5,700 insp | Large dataset |
-| Maricopa County, AZ | Scraper | `MaricopaScraperAdapter` | ~56,000 insp | Custom scraper for county portal |
-| Los Angeles County, CA | Scraper | `LACountyScraperAdapter` | ~100 insp | Web scraper, limited data |
-| State of Georgia | Scraper | `GeorgiaTylerAdapter` | ~8,000 insp | Tyler/MHD platform, pagination-based |
-| **Tarrant County, TX** | Scraper | `TarrantScraperAdapter` | TBD | Playwright-based, covers 27 cities (DFW area) |
-| Louisville Metro, KY | ArcGIS | `ArcGISAdapter` | ~2,000 insp | FeatureServer with chemistry data |
-| Arlington, TX | ArcGIS | `ArcGISAdapter` | ~1,700 insp | Score-based system |
-| Jackson County, OR | ArcGIS | `ArcGISAdapter` | ~200 insp | Uses whereClause filter for pools |
-| Webster, TX | ArcGIS | `ArcGISAdapter` | ~25 insp | Small city, 365-day rolling window |
+### California (CA) - 10 targets
+| Jurisdiction | Status | Source Type | Records | Notes |
+|--------------|--------|-------------|---------|-------|
+| Los Angeles County | ✅ | Playwright | 1,173 | Backfill running |
+| San Diego County | ✅ | Accela Scraper | 90 | Permit data |
+| Alameda County | ⬜ | | | |
+| Fresno County | ⬜ | | | |
+| Orange County | ⬜ | | | |
+| Riverside County | ⬜ | | | |
+| Sacramento County | ⬜ | | | |
+| San Bernardino County | ⬜ | | | |
+| San Francisco | ⬜ | | | |
+| Santa Clara County | ⬜ | | | |
+
+### Colorado (CO) - 6 targets
+| Jurisdiction | Status | Source Type | Notes |
+|--------------|--------|-------------|-------|
+| Arapahoe County | 🔍 | MyHealthDepartment | Proprietary SaaS |
+| Aurora | ⬜ | | |
+| Colorado Springs | ⬜ | | |
+| Denver | 🔍 | MyHealthDepartment | Proprietary SaaS |
+| El Paso County | ⬜ | | |
+| Jefferson County | ⬜ | | |
+
+### Florida (FL) - 8 targets
+| Jurisdiction | Status | Source Type | Records | Notes |
+|--------------|--------|-------------|---------|-------|
+| Hillsborough County | ✅ | eBridge | 93 | Document system |
+| Pinellas County | ✅ | eBridge | 98 | Backfill running |
+| Broward County | 🔍 | None | | No public portal |
+| Duval County | 🔍 | None | | No public portal |
+| Lee County | 🔍 | None | | No public portal |
+| Miami-Dade County | 🔍 | None | | Email-based only |
+| Orange County | 🔍 | None | | No public portal |
+| Palm Beach County | 🔍 | None | | No public portal |
+
+### Georgia (GA) - 6 targets
+| Jurisdiction | Status | Source Type | Records | Notes |
+|--------------|--------|-------------|---------|-------|
+| State of Georgia | ✅ | Tyler Scraper | 7,594 | Covers all GA targets |
+| Atlanta | ✅ | - | - | Covered by state |
+| Cobb County | ✅ | - | - | Covered by state |
+| DeKalb County | ✅ | - | - | Covered by state |
+| Fulton County | ✅ | - | - | Covered by state |
+| Gwinnett County | ✅ | - | - | Covered by state |
+| Savannah | ✅ | - | - | Covered by state |
+
+### Illinois (IL) - 6 targets
+| Jurisdiction | Status | Source Type | Notes |
+|--------------|--------|-------------|-------|
+| Chicago | 🔍 | None | data.cityofchicago.org has no pool data |
+| Cook County | 🔍 | None | CCDPH - no public portal |
+| DuPage County | ⬜ | | |
+| Kane County | ⬜ | | |
+| Lake County | ⬜ | | |
+| Will County | ⬜ | | |
+
+### Kentucky (KY) - 4 targets
+| Jurisdiction | Status | Source Type | Records | Notes |
+|--------------|--------|-------------|---------|-------|
+| Louisville | ✅ | ArcGIS | 3,889 | |
+| Fayette County | ⬜ | | | |
+| Jefferson County | ⬜ | | | |
+| Lexington | ⬜ | | | |
+
+### Maryland (MD) - 6 targets
+| Jurisdiction | Status | Source Type | Records | Notes |
+|--------------|--------|-------------|---------|-------|
+| Montgomery County | ✅ | Socrata | 10,865 | |
+| Anne Arundel County | ⬜ | | | |
+| Baltimore | ⬜ | | | |
+| Baltimore County | ⬜ | | | |
+| Howard County | ⬜ | | | |
+| Prince George's County | ⬜ | | | |
+
+### Nevada (NV) - 5 targets
+| Jurisdiction | Status | Source Type | Notes |
+|--------------|--------|-------------|-------|
+| Clark County | 🔍 | Records request | SNHD - no public portal |
+| Henderson | 🔍 | See Clark | Covered by SNHD |
+| Las Vegas | 🔍 | See Clark | Covered by SNHD |
+| Reno | ⬜ | | |
+| Washoe County | ⬜ | | |
+
+### New York (NY) - 7 targets
+| Jurisdiction | Status | Source Type | Records | Notes |
+|--------------|--------|-------------|---------|-------|
+| New York City | ✅ | Socrata | 5,747 | |
+| Buffalo | ⬜ | | | |
+| Erie County | ⬜ | | | |
+| Nassau County | ⬜ | | | |
+| Rochester | ⬜ | | | |
+| Suffolk County | ⬜ | | | |
+| Westchester County | ⬜ | | | |
+
+### North Carolina (NC) - 6 targets
+| Jurisdiction | Status | Source Type | Records | Notes |
+|--------------|--------|-------------|---------|-------|
+| Mecklenburg County | ✅ | NC CDP Portal | 28 fac | Includes Charlotte |
+| Charlotte | ✅ | - | - | Covered by Mecklenburg |
+| Greensboro | ⬜ | | | |
+| Guilford County | ⬜ | | | |
+| Raleigh | ⬜ | | | |
+| Wake County | ⬜ | | | |
+
+### Oregon (OR) - 5 targets
+| Jurisdiction | Status | Source Type | Records | Notes |
+|--------------|--------|-------------|---------|-------|
+| Jackson County | ✅ | ArcGIS | 207 | Not in target list but integrated |
+| Eugene | ⬜ | | | |
+| Multnomah County | ⬜ | | | |
+| Portland | ⬜ | | | |
+| Salem | ⬜ | | | |
+| Washington County | ⬜ | | | |
+
+### Pennsylvania (PA) - 6 targets
+| Jurisdiction | Status | Source Type | Notes |
+|--------------|--------|-------------|-------|
+| Philadelphia | 🔍 | None | OpenDataPhilly has no pool data |
+| Allegheny County | ⬜ | | |
+| Bucks County | ⬜ | | |
+| Delaware County | ⬜ | | |
+| Montgomery County | ⬜ | | |
+| Pittsburgh | ⬜ | | |
+
+### Texas (TX) - 11 targets
+| Jurisdiction | Status | Source Type | Records | Notes |
+|--------------|--------|-------------|---------|-------|
+| Austin | ✅ | Socrata | 5,972 | |
+| Houston | ✅ | Tyler Scraper | 3,357 | Backfill running |
+| Tarrant County | ✅ | Playwright | 291 | Covers DFW cities |
+| Arlington | ✅ | ArcGIS | 1,693 | Not in target list |
+| Webster | ✅ | ArcGIS | 24 | Server intermittent |
+| Bexar County | 🔍 | None | San Antonio - no portal |
+| Dallas | 🔍 | None | dallasopendata.com - nothing |
+| Dallas County | 🔍 | None | |
+| El Paso | ⬜ | | |
+| Fort Worth | 🔍 | MyHealthDepartment | Proprietary SaaS |
+| Harris County | 🔍 | Inspect2GO | Proprietary system |
+| San Antonio | 🔍 | None | No public portal |
+
+### Washington (WA) - 6 targets
+| Jurisdiction | Status | Source Type | Notes |
+|--------------|--------|-------------|-------|
+| King County | 🔍 | None | Requires phone request |
+| Seattle | 🔍 | See King | Covered by King County |
+| Pierce County | ⬜ | | |
+| Snohomish County | ⬜ | | |
+| Spokane | ⬜ | | |
+| Tacoma | ⬜ | | |
 
 ---
 
-## Inactive Sources
+## Other States (Not Detailed)
 
-Sources that were working but are currently unavailable.
+States with targets but no integrated sources yet:
 
-| Jurisdiction | Type | Reason | Last Checked | Notes |
-|-------------|------|--------|--------------|-------|
-| Webster, TX | ArcGIS | Server was offline | 2026-01-15 | Back online as of 2026-01-19, reactivated |
-
----
-
-## Blocked Sources
-
-Sources we've investigated but cannot access programmatically.
-
-| Jurisdiction | Type | Blocker | Details |
-|-------------|------|---------|---------|
-| **MyHealthDepartment (general)** | Tyler Tech | 403 Forbidden | Bot detection (Cloudflare). Most MHD portals block automated access. Workaround: scrape individual facility pages like Georgia adapter does. |
-| **San Luis Obispo County, CA** | MHD | 403 Forbidden | Uses SwimSafeSLO map + MHD backend. Same blocker as other MHD sites. |
-| **Michigan EGLE** | Portal | Account required | MiEHDWIS system requires registration/login to access data |
-
----
-
-## Potential Sources - API Based
-
-Sources with known APIs that could be integrated.
-
-### High Priority (Large jurisdictions, confirmed APIs)
-
-| Jurisdiction | Type | Endpoint | Est. Size | Status | Notes |
-|-------------|------|----------|-----------|--------|-------|
-| Houston, TX | Web Portal | houstonconsumer.org | Large | **Scraping needed** | Search by name/zip/letter. Would need scraper. |
-| San Diego County, CA | Unknown | data.sandiegocounty.gov | ~4,000 pools | **Not found** | Has pool program but no open data API found |
-| Clark County, NV (Las Vegas) | Unknown | clarkcountynv.gov | Large | **Not found** | Southern Nevada Health District handles pools |
-| Miami-Dade County, FL | Unknown | opendata.miamidade.gov | Large | **Not found** | Has open data portal but no pool inspections |
-
-### Investigated - Outdated Data
-
-| Jurisdiction | Type | Endpoint | Status | Notes |
-|-------------|------|----------|--------|-------|
-| Cincinnati/Hamilton County, OH | Socrata | data.cincinnati-oh.gov/ivda-umw7 | **Outdated** | 7,216 pool records but last updated 2015 |
-| Fort Worth, TX | Socrata | data.fortworthtexas.gov/xv5v-cjes | **Outdated** | Has pool inspections but data only through Aug 2019 |
-
-### Investigated - Too Small
-
-| Jurisdiction | Type | Records | Notes |
-|-------------|------|---------|-------|
-| Casper-Natrona County, WY | ArcGIS MapServer | 2 pools | Too small to be worth integrating |
-
-### Medium Priority
-
-| Jurisdiction | Type | Endpoint | Est. Size | Status | Notes |
-|-------------|------|----------|-----------|--------|-------|
-| Wake County, NC (Raleigh) | Power BI | powerbigov.us | ~1,400 pools | **No API** | Data in Power BI dashboard, no export |
-| King County, WA (Seattle) | Unknown | data.kingcounty.gov | Unknown | **Not found** | Has food inspections but not pools |
-| Hillsborough County, FL (Tampa) | eBridge | floridahealth.gov | Unknown | **Account req** | Uses eBridge system, needs credentials |
-| Orange County, FL (Orlando) | Unknown | ocgis-datahub-ocfl.hub.arcgis.com | Unknown | **Not found** | GIS data but no pool inspections |
-| Fairfax County, VA | ArcGIS | data-fairfaxcountygis.opendata.arcgis.com | Unknown | **Location only** | Has pool locations, not inspections |
-| Travis County, TX (Austin area) | Unknown | traviscountytx.gov | Unknown | **Not found** | Texas DSHS delegates to local authorities |
-| Pima County, AZ (Tucson) | Unknown | gisopendata.pima.gov | Unknown | **Not found** | Has pool program but no open data |
-| Snohomish County, WA | Web | snohd.org | Unknown | **Web only** | Inspection reports viewable online, no API |
-| Denver, CO | Unknown | data.colorado.gov | Unknown | **Not found** | State portal exists but no pool data |
-| Philadelphia, PA | Unknown | opendataphilly.org | Unknown | **Location only** | Has pool locations (Parks & Rec), not inspections |
-
-### Lower Priority / Smaller Jurisdictions
-
-| Jurisdiction | Type | Notes |
-|-------------|------|-------|
-| Bexar County, TX (San Antonio) | Unknown | No open data found |
-| Duval County, FL (Jacksonville) | Unknown | No open data found |
-| Hamilton County, OH (Cincinnati) | Unknown | No open data found |
-| San Francisco, CA | Unknown | No open data found |
-| Riverside County, CA | Unknown | No open data found |
-| Oklahoma (statewide) | Unknown | No open data found |
+| State | Targets | Notes |
+|-------|---------|-------|
+| Alabama | 5 | Not researched |
+| Alaska | 3 | Not researched |
+| Arkansas | 4 | Not researched |
+| Connecticut | 5 | Not researched |
+| Delaware | 3 | Not researched |
+| Hawaii | 3 | Not researched |
+| Idaho | 4 | Not researched |
+| Indiana | 5 | Not researched |
+| Iowa | 4 | Not researched |
+| Kansas | 5 | Not researched |
+| Louisiana | 5 | Not researched |
+| Maine | 3 | Not researched |
+| Massachusetts | 5 | Not researched |
+| Michigan | 6 | Not researched |
+| Minnesota | 5 | Not researched |
+| Mississippi | 4 | Not researched |
+| Missouri | 5 | Not researched |
+| Montana | 4 | Not researched |
+| Nebraska | 4 | Not researched |
+| New Hampshire | 3 | Not researched |
+| New Jersey | 7 | Not researched |
+| New Mexico | 4 | Not researched |
+| North Dakota | 3 | Not researched |
+| Ohio | 6 | Not researched |
+| Oklahoma | 4 | Not researched |
+| Rhode Island | 3 | Not researched |
+| South Carolina | 5 | Not researched |
+| South Dakota | 3 | Not researched |
+| Tennessee | 6 | Not researched |
+| Utah | 4 | Not researched |
+| Vermont | 2 | Not researched |
+| Virginia | 6 | Not researched |
+| West Virginia | 3 | Not researched |
+| Wisconsin | 5 | Not researched |
+| Wyoming | 3 | Not researched |
 
 ---
 
-## Potential Sources - Web Scraping Required
+## Blocked / No Public Data
 
-Sources where data is available but requires custom scraping.
+Jurisdictions researched but cannot access:
 
-| Jurisdiction | Data Format | Difficulty | Est. Size | Notes |
-|-------------|-------------|------------|-----------|-------|
-| **Houston, TX** | Web search portal | Medium | Large | Search by name, zip, letter. Could enumerate by zip code. |
-| **Cobb & Douglas County, GA** | Web lookup | Medium | Unknown | Same platform as Georgia statewide (Tyler/MHD) |
-| **Florida (67 counties)** | Per-county portals | Hard | Very large | Each county has own contact; no centralized API |
-| **Various MHD jurisdictions** | Tyler Tech pages | Medium | Varies | Could adapt Georgia scraper pattern to other MHD sites |
-
----
-
-## Potential Sources - Aggregate/Statistics Only
-
-Sources that provide summary statistics but not individual records.
-
-| Source | Data Available | Format | Notes |
-|--------|---------------|--------|-------|
-| **Florida Health CHARTS** | Unsatisfactory inspection % by county | Excel export | 2005-2024 data. Good for coverage stats, not facility-level. |
-| **CDC Data** | National statistics | Reports/PDF | Policy-level data, not facility inspections |
+| Jurisdiction | Reason |
+|--------------|--------|
+| Chicago, IL | No pool data on data.cityofchicago.org |
+| Philadelphia, PA | No pool data on OpenDataPhilly |
+| Dallas, TX | No pool data on dallasopendata.com |
+| Las Vegas / Clark County, NV | SNHD requires phone records request |
+| King County, WA | Requires phone request |
+| Miami-Dade, FL | Email-based applications only |
+| Fort Worth, TX | MyHealthDepartment (proprietary SaaS) |
+| Denver, CO | MyHealthDepartment (proprietary SaaS) |
+| Harris County, TX | Inspect2GO (proprietary) |
 
 ---
 
-## Potential Sources - PDF/Document Based
+## Platform Reference
 
-Sources where inspection reports are published as documents.
+### Easy to Integrate
+| Platform | Difficulty | Examples |
+|----------|------------|----------|
+| **Socrata** | Easy | Austin, NYC, Montgomery MD |
+| **ArcGIS FeatureServer** | Easy-Medium | Louisville, Arlington |
 
-| Jurisdiction | Format | Difficulty | Notes |
-|-------------|--------|------------|-------|
-| Various counties | PDF reports | Very Hard | Individual inspection certificates. Would need PDF parsing + OCR. |
-| State health depts | Monthly reports | Hard | Aggregate PDF reports, not machine-readable |
+### Requires Scraping
+| Platform | Difficulty | Examples |
+|----------|------------|----------|
+| **Tyler/MHD** | Medium | Georgia, Houston |
+| **eBridge** | Medium | Hillsborough, Pinellas (FL) |
+| **Accela Citizen Access** | Medium | San Diego |
+| **Custom portals** | Medium-Hard | Maricopa, LA County |
 
----
-
-## Platform Notes
-
-### Socrata
-- **Best option** when available
-- Clean API, well-documented
-- Common endpoint pattern: `data.{city/county}.gov`
-- Already integrated: Austin, Montgomery County, NYC
-
-### ArcGIS FeatureServer/MapServer
-- **Second best option**
-- REST API with JSON output
-- Can filter with `where` clauses
-- Already integrated: Louisville, Arlington, Jackson County, Webster
-- Search pattern: Look for `/FeatureServer/` or `/MapServer/` endpoints on `*.arcgis.com` hubs
-
-### Tyler Technologies / MyHealthDepartment
-- **Most common platform** for health departments
-- Aggressive bot protection (403 errors)
-- **Workaround**: Scrape individual facility pages (see Georgia adapter)
-- URL pattern: `healthspace.com` or `*.healthspace.com`
-
-### Custom Government Portals
-- **Case-by-case** implementation
-- Examples: Maricopa County, LA County
-- Requires inspecting network requests, building custom scrapers
+### Proprietary (Difficult)
+| Platform | Issue |
+|----------|-------|
+| **MyHealthDepartment.com** | SaaS, no public API |
+| **Inspect2GO** | Proprietary, no public access |
 
 ---
 
 ## Discovery Resources
 
-Tools and sites for finding new sources:
-
-1. **Socrata Discovery API**: `api.us.socrata.com/api/catalog/v1`
-   - Search for "pool inspection" across all Socrata portals
-
-2. **ArcGIS Hub Search**: `hub.arcgis.com/search`
-   - Search for pool/swimming/aquatic datasets
-
-3. **Open Data Network**: `opendatanetwork.com`
-   - Cross-catalog search
-
-4. **Data.gov**: `catalog.data.gov`
-   - Federal catalog, includes some local data
-
-5. **Google**: `site:*.gov "pool inspection" data`
-   - Find government pages mentioning pool inspection data
+1. **Socrata Discovery**: `api.us.socrata.com/api/catalog/v1`
+2. **ArcGIS Hub**: `hub.arcgis.com/search`
+3. **Google**: `site:*.gov "pool inspection" data`
 
 ---
 
@@ -199,34 +288,10 @@ Tools and sites for finding new sources:
 
 When adding a new source:
 
-- [ ] Identify data format (API, scraping, PDF)
-- [ ] Test endpoint accessibility
-- [ ] Document field mappings
+- [ ] Research portal structure
+- [ ] Create adapter in `src/ingestion/adapters/`
 - [ ] Create transformer in `src/ingestion/transformers/`
 - [ ] Register in `src/ingestion/registry.ts`
-- [ ] Add Source record to `prisma/seed.ts`
+- [ ] Add setup script in `scripts/add-{jurisdiction}.ts`
 - [ ] Run backfill: `npm run ingest:backfill -- --source {source-id}`
 - [ ] Update this file
-
----
-
-## Contact / Public Records
-
-For jurisdictions without open APIs, consider:
-
-1. **Email the health department** - Ask about data availability
-2. **FOIA/Public Records Request** - Formal request for bulk data
-3. **Ask about API access** - Some have internal APIs they may share
-4. **Partnership inquiry** - For public interest projects
-
----
-
-## Change Log
-
-| Date | Change |
-|------|--------|
-| 2026-01-20 | Initial creation of SOURCES.md |
-| 2026-01-20 | Added Louisville, Arlington, Jackson County as active |
-| 2026-01-20 | Documented MHD/Tyler blocking and workarounds |
-| 2026-01-20 | Added Houston, Florida aggregate as potential sources |
-| 2026-01-20 | **Added Tarrant County, TX** - Playwright scraper for ASP.NET WebForms portal, covers 27 DFW-area cities |
