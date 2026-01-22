@@ -1,0 +1,507 @@
+{
+  "generated_at": "2026-01-22T07:16:25.139Z",
+  "summary": {
+    "total_facilities": 22732,
+    "total_inspections": 104898,
+    "total_violations": 0,
+    "facilities_with_inspections": 22705,
+    "inspections_with_violations": 0,
+    "facilities_enriched_google": 1968
+  },
+  "facility_fields": [
+    {
+      "field": "id",
+      "category": "core",
+      "facilities_with_data": 22732,
+      "percentage": 100,
+      "facilities_missing": 0
+    },
+    {
+      "field": "slug",
+      "category": "core",
+      "facilities_with_data": 22732,
+      "percentage": 100,
+      "facilities_missing": 0
+    },
+    {
+      "field": "jurisdictionId",
+      "category": "core",
+      "facilities_with_data": 22732,
+      "percentage": 100,
+      "facilities_missing": 0
+    },
+    {
+      "field": "rawName",
+      "category": "raw_data",
+      "facilities_with_data": 22732,
+      "percentage": 100,
+      "facilities_missing": 0
+    },
+    {
+      "field": "rawAddress",
+      "category": "raw_data",
+      "facilities_with_data": 22732,
+      "percentage": 100,
+      "facilities_missing": 0
+    },
+    {
+      "field": "rawCity",
+      "category": "raw_data",
+      "facilities_with_data": 22721,
+      "percentage": 99.95,
+      "facilities_missing": 11
+    },
+    {
+      "field": "rawState",
+      "category": "raw_data",
+      "facilities_with_data": 22732,
+      "percentage": 100,
+      "facilities_missing": 0
+    },
+    {
+      "field": "rawZip",
+      "category": "raw_data",
+      "facilities_with_data": 18697,
+      "percentage": 82.25,
+      "facilities_missing": 4035
+    },
+    {
+      "field": "normalizedName",
+      "category": "normalized",
+      "facilities_with_data": 22732,
+      "percentage": 100,
+      "facilities_missing": 0
+    },
+    {
+      "field": "normalizedAddress",
+      "category": "normalized",
+      "facilities_with_data": 22732,
+      "percentage": 100,
+      "facilities_missing": 0
+    },
+    {
+      "field": "displayName",
+      "category": "display",
+      "facilities_with_data": 22732,
+      "percentage": 100,
+      "facilities_missing": 0
+    },
+    {
+      "field": "displayAddress",
+      "category": "display",
+      "facilities_with_data": 22732,
+      "percentage": 100,
+      "facilities_missing": 0
+    },
+    {
+      "field": "city",
+      "category": "display",
+      "facilities_with_data": 22732,
+      "percentage": 100,
+      "facilities_missing": 0
+    },
+    {
+      "field": "state",
+      "category": "display",
+      "facilities_with_data": 22732,
+      "percentage": 100,
+      "facilities_missing": 0
+    },
+    {
+      "field": "zipCode",
+      "category": "display",
+      "facilities_with_data": 18697,
+      "percentage": 82.25,
+      "facilities_missing": 4035
+    },
+    {
+      "field": "latitude",
+      "category": "location",
+      "facilities_with_data": 18446,
+      "percentage": 81.15,
+      "facilities_missing": 4286
+    },
+    {
+      "field": "longitude",
+      "category": "location",
+      "facilities_with_data": 18446,
+      "percentage": 81.15,
+      "facilities_missing": 4286
+    },
+    {
+      "field": "facilityType",
+      "category": "classification",
+      "facilities_with_data": 0,
+      "percentage": 0,
+      "facilities_missing": 22732
+    },
+    {
+      "field": "status",
+      "category": "classification",
+      "facilities_with_data": 22732,
+      "percentage": 100,
+      "facilities_missing": 0
+    },
+    {
+      "field": "lastInspectionDate",
+      "category": "inspection_summary",
+      "facilities_with_data": 22701,
+      "percentage": 99.86,
+      "facilities_missing": 31
+    },
+    {
+      "field": "lastInspectionResult",
+      "category": "inspection_summary",
+      "facilities_with_data": 14999,
+      "percentage": 65.98,
+      "facilities_missing": 7733
+    },
+    {
+      "field": "totalInspections",
+      "category": "inspection_summary",
+      "facilities_with_data": 22701,
+      "percentage": 99.86,
+      "facilities_missing": 31
+    },
+    {
+      "field": "googlePlaceId",
+      "category": "google_places",
+      "facilities_with_data": 1968,
+      "percentage": 8.66,
+      "facilities_missing": 20764
+    },
+    {
+      "field": "googleMatchDistance",
+      "category": "google_places",
+      "facilities_with_data": 1968,
+      "percentage": 8.66,
+      "facilities_missing": 20764
+    },
+    {
+      "field": "googleRating",
+      "category": "google_places",
+      "facilities_with_data": 1869,
+      "percentage": 8.22,
+      "facilities_missing": 20863
+    },
+    {
+      "field": "googleReviewCount",
+      "category": "google_places",
+      "facilities_with_data": 1869,
+      "percentage": 8.22,
+      "facilities_missing": 20863
+    },
+    {
+      "field": "googleReviews",
+      "category": "google_places",
+      "facilities_with_data": 1869,
+      "percentage": 8.22,
+      "facilities_missing": 20863
+    },
+    {
+      "field": "googlePhone",
+      "category": "google_places",
+      "facilities_with_data": 1900,
+      "percentage": 8.36,
+      "facilities_missing": 20832
+    },
+    {
+      "field": "googleWebsite",
+      "category": "google_places",
+      "facilities_with_data": 1882,
+      "percentage": 8.28,
+      "facilities_missing": 20850
+    },
+    {
+      "field": "googleHours",
+      "category": "google_places",
+      "facilities_with_data": 944,
+      "percentage": 4.15,
+      "facilities_missing": 21788
+    },
+    {
+      "field": "googlePhotos",
+      "category": "google_places",
+      "facilities_with_data": 1918,
+      "percentage": 8.44,
+      "facilities_missing": 20814
+    },
+    {
+      "field": "googleEditorialSummary",
+      "category": "google_places",
+      "facilities_with_data": 1088,
+      "percentage": 4.79,
+      "facilities_missing": 21644
+    },
+    {
+      "field": "googleEnrichedAt",
+      "category": "google_places",
+      "facilities_with_data": 1968,
+      "percentage": 8.66,
+      "facilities_missing": 20764
+    },
+    {
+      "field": "goodForChildren",
+      "category": "google_attributes",
+      "facilities_with_data": 1166,
+      "percentage": 5.13,
+      "facilities_missing": 21566
+    },
+    {
+      "field": "goodForGroups",
+      "category": "google_attributes",
+      "facilities_with_data": 0,
+      "percentage": 0,
+      "facilities_missing": 22732
+    },
+    {
+      "field": "wheelchairAccessible",
+      "category": "google_attributes",
+      "facilities_with_data": 1884,
+      "percentage": 8.29,
+      "facilities_missing": 20848
+    },
+    {
+      "field": "allowsDogs",
+      "category": "google_attributes",
+      "facilities_with_data": 775,
+      "percentage": 3.41,
+      "facilities_missing": 21957
+    },
+    {
+      "field": "restroom",
+      "category": "google_attributes",
+      "facilities_with_data": 339,
+      "percentage": 1.49,
+      "facilities_missing": 22393
+    },
+    {
+      "field": "googleTypes",
+      "category": "google_places",
+      "facilities_with_data": 1968,
+      "percentage": 8.66,
+      "facilities_missing": 20764
+    }
+  ],
+  "inspection_fields": [
+    {
+      "field": "id",
+      "category": "inspection_core",
+      "records_with_data": 104898,
+      "percentage": 100,
+      "records_missing": 0
+    },
+    {
+      "field": "facilityId",
+      "category": "inspection_core",
+      "records_with_data": 104898,
+      "percentage": 100,
+      "records_missing": 0
+    },
+    {
+      "field": "inspectionDate",
+      "category": "inspection_core",
+      "records_with_data": 104898,
+      "percentage": 100,
+      "records_missing": 0
+    },
+    {
+      "field": "rawRecordId",
+      "category": "inspection_detail",
+      "records_with_data": 104898,
+      "percentage": 100,
+      "records_missing": 0
+    },
+    {
+      "field": "rawInspectionType",
+      "category": "inspection_detail",
+      "records_with_data": 104844,
+      "percentage": 99.95,
+      "records_missing": 54
+    },
+    {
+      "field": "rawResult",
+      "category": "inspection_detail",
+      "records_with_data": 96895,
+      "percentage": 92.37,
+      "records_missing": 8003
+    },
+    {
+      "field": "rawScore",
+      "category": "inspection_detail",
+      "records_with_data": 18245,
+      "percentage": 17.39,
+      "records_missing": 86653
+    },
+    {
+      "field": "inspectionType",
+      "category": "inspection_detail",
+      "records_with_data": 104844,
+      "percentage": 99.95,
+      "records_missing": 54
+    },
+    {
+      "field": "result",
+      "category": "inspection_detail",
+      "records_with_data": 96895,
+      "percentage": 92.37,
+      "records_missing": 8003
+    },
+    {
+      "field": "score",
+      "category": "inspection_detail",
+      "records_with_data": 0,
+      "percentage": 0,
+      "records_missing": 104898
+    },
+    {
+      "field": "demerits",
+      "category": "inspection_detail",
+      "records_with_data": 8147,
+      "percentage": 7.77,
+      "records_missing": 96751
+    },
+    {
+      "field": "isPassing",
+      "category": "inspection_detail",
+      "records_with_data": 95215,
+      "percentage": 90.77,
+      "records_missing": 9683
+    },
+    {
+      "field": "isClosure",
+      "category": "inspection_detail",
+      "records_with_data": 1353,
+      "percentage": 1.29,
+      "records_missing": 103545
+    },
+    {
+      "field": "inspectorName",
+      "category": "inspection_detail",
+      "records_with_data": 0,
+      "percentage": 0,
+      "records_missing": 104898
+    },
+    {
+      "field": "inspectorId",
+      "category": "inspection_detail",
+      "records_with_data": 0,
+      "percentage": 0,
+      "records_missing": 104898
+    },
+    {
+      "field": "notes",
+      "category": "inspection_detail",
+      "records_with_data": 0,
+      "percentage": 0,
+      "records_missing": 104898
+    },
+    {
+      "field": "followUpRequired",
+      "category": "inspection_detail",
+      "records_with_data": 0,
+      "percentage": 0,
+      "records_missing": 104898
+    },
+    {
+      "field": "followUpDate",
+      "category": "inspection_detail",
+      "records_with_data": 0,
+      "percentage": 0,
+      "records_missing": 104898
+    },
+    {
+      "field": "sourceUrl",
+      "category": "inspection_detail",
+      "records_with_data": 76541,
+      "percentage": 72.97,
+      "records_missing": 28357
+    },
+    {
+      "field": "reportUrl",
+      "category": "inspection_detail",
+      "records_with_data": 57447,
+      "percentage": 54.76,
+      "records_missing": 47451
+    }
+  ],
+  "violation_fields": [
+    {
+      "field": "id",
+      "category": "violation_core",
+      "records_with_data": 0,
+      "percentage": 100,
+      "records_missing": 0
+    },
+    {
+      "field": "inspectionId",
+      "category": "violation_core",
+      "records_with_data": 0,
+      "percentage": 100,
+      "records_missing": 0
+    },
+    {
+      "field": "rawDescription",
+      "category": "violation_core",
+      "records_with_data": 0,
+      "percentage": 100,
+      "records_missing": 0
+    },
+    {
+      "field": "description",
+      "category": "violation_core",
+      "records_with_data": 0,
+      "percentage": 100,
+      "records_missing": 0
+    },
+    {
+      "field": "rawCode",
+      "category": "violation_detail",
+      "records_with_data": 0,
+      "percentage": null,
+      "records_missing": 0
+    },
+    {
+      "field": "code",
+      "category": "violation_detail",
+      "records_with_data": 0,
+      "percentage": null,
+      "records_missing": 0
+    },
+    {
+      "field": "category",
+      "category": "violation_detail",
+      "records_with_data": 0,
+      "percentage": null,
+      "records_missing": 0
+    },
+    {
+      "field": "severity",
+      "category": "violation_detail",
+      "records_with_data": 0,
+      "percentage": null,
+      "records_missing": 0
+    },
+    {
+      "field": "isCritical",
+      "category": "violation_detail",
+      "records_with_data": 0,
+      "percentage": null,
+      "records_missing": 0
+    },
+    {
+      "field": "correctedAt",
+      "category": "violation_detail",
+      "records_with_data": 0,
+      "percentage": null,
+      "records_missing": 0
+    },
+    {
+      "field": "correctionNotes",
+      "category": "violation_detail",
+      "records_with_data": 0,
+      "percentage": null,
+      "records_missing": 0
+    }
+  ]
+}
