@@ -7,7 +7,7 @@
 
 ## Current Status
 
-**Last updated:** 2026-01-21
+**Last updated:** 2026-01-22
 
 | Item | Status |
 |------|--------|
@@ -16,48 +16,48 @@
 | Railway | Deployed, production running |
 | Database | PostgreSQL on Railway (`postgres-8mb0` service) |
 | Live URL | https://poolinspections.us |
-| Total Inspections | 95,315 |
-| Total Facilities | 18,638 |
-| Total Jurisdictions | 13 |
-| Geocoded Facilities | 81% (15,102/18,638) |
+| Total Inspections | ~103,000 |
+| Total Facilities | ~22,500 |
+| Total Jurisdictions | 16 |
+| Google Enriched | 1,968 facilities |
+
+**Recent changes (2026-01-22):**
+- Added Google Places API enrichment (1,968 facilities with ratings, reviews, hours, etc.)
+- Added Pinellas County FL scraper (eBridge) - 39k+ inspection records
+- Added San Diego County CA scraper (Accela) - 90 inspections
+- Added Mecklenburg County NC scraper (NC CDP) - 28 facilities
+- Consolidated SOURCES.md documentation
+- Linked all GA targets to Georgia statewide (19 integrated targets)
 
 **Recent changes (2026-01-21):**
-- Completed Georgia statewide backfill (7,594 inspections, 7,433 facilities)
-- Added Hillsborough County FL eBridge scraper (93 inspections)
-- Added geocoding script using Nominatim API (free OSM geocoder)
-- Geocoded 72% of facilities (up from ~45%)
-- Added overnight runner script with auto-retry for long backfills
-
-**Recent changes (2026-01-20):**
-- Added Houston scraper (Tyler Technologies portal)
-- Added LA County scraper (Playwright + JS pagination)
-- Fixed Houston pagination bug (was checking after navigating away)
-- Fixed LA County pagination (added `goPageIndex(n)` JS call)
-- Added `--resume` flag to backfill script for DB drop recovery
-- Added `RESUME` sync type for cursor-based continuation
+- Completed Georgia statewide backfill (7,594 inspections)
+- Added Hillsborough County FL eBridge scraper
+- Added geocoding script using Nominatim API
+- Added overnight runner script with auto-retry
 
 **Active data sources:**
 | Source | Type | Status | Records | Notes |
 |--------|------|--------|---------|-------|
 | Maricopa County, AZ | API | ✅ Active | 57,124 | Largest dataset |
+| Pinellas County, FL | eBridge | ✅ Active | 39,400 | Document system |
 | Montgomery County, MD | Socrata | ✅ Active | 10,865 | |
-| Georgia (statewide) | Tyler | ✅ Active | 7,594 | Backfill complete |
+| Georgia (statewide) | Tyler | ✅ Active | 7,594 | Covers 6 GA targets |
 | Austin, TX | Socrata | ✅ Active | 5,972 | |
+| Houston, TX | Tyler | ✅ Active | 5,637 | |
 | New York City, NY | Socrata | ✅ Active | 5,747 | |
 | Louisville, KY | ArcGIS | ✅ Active | 3,889 | |
 | Arlington, TX | ArcGIS | ✅ Active | 1,693 | |
-| Houston, TX | Tyler | 🔄 Running | 1,626 | Backfill in progress (~3,500 total) |
+| Los Angeles County, CA | Playwright | ✅ Active | 1,173 | |
 | Tarrant County, TX | Playwright | ✅ Active | 291 | |
 | Jackson County, OR | ArcGIS | ✅ Active | 207 | |
-| Los Angeles County, CA | Playwright | 🔄 Running | 170 | Backfill in progress (~300 total) |
-| Hillsborough County, FL | eBridge | ✅ Active | 93 | Document management system |
+| Hillsborough County, FL | eBridge | ✅ Active | 93 | |
+| San Diego County, CA | Accela | ✅ Active | 90 | Permit data |
+| Mecklenburg County, NC | NC CDP | ✅ Active | 28 | Includes Charlotte |
 | Webster, TX | ArcGIS | ❌ Inactive | 24 | Server offline |
 
 **Next steps:**
-- Complete geocoding (~3,700 facilities remaining)
-- Run full Houston backfill (~3,500 records)
-- Run full LA County backfill (~300 records)
-- Add more Florida counties via eBridge
+- Display Google Places data on facility pages
+- Add more jurisdictions (see SOURCES.md for opportunities)
 - Frontend improvements
 
 ---

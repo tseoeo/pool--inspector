@@ -1,0 +1,16 @@
+{
+  "lastProcessedId": "cmknnp4kz042vonalk9kge3xp",
+  "totalProcessed": 3187,
+  "totalEnriched": 1968,
+  "totalNoMatch": 3,
+  "totalTooFar": 1134,
+  "totalFailed": 82,
+  "totalCost": 125.76000000000846,
+  "apiKeyStats": {
+    "Account1": {
+      "requests": 117,
+      "errors": 0
+    }
+  },
+  "startedAt": "2026-01-22T05:56:00.574Z"
+}
