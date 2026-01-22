@@ -93,7 +93,7 @@ export function transformMecklenburg(raw: RawPayload, source: Source): Canonical
       inspectionDate,
       rawInspectionType: d.establishmentType || "Pool Inspection",
       rawResult,
-      rawScore,
+      rawScore: rawScore !== null ? String(rawScore) : null,
       demerits: rawScore, // NC uses demerit system (lower is better)
       sourceUrl: d.detailUrl || null,
       reportUrl: d.detailUrl || null,

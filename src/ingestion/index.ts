@@ -39,7 +39,7 @@ export async function runIngestion(options: IngestionOptions): Promise<Ingestion
     cursor = adapter.getInitialCursor();
   } else if (syncType === "RESUME" && source.cursor) {
     // Resume from saved cursor position
-    cursor = source.cursor as CursorState;
+    cursor = source.cursor as unknown as CursorState;
     console.log(`Resuming from saved cursor:`, cursor);
   } else {
     cursor = adapter.getIncrementalCursor(source.lastSyncAt);

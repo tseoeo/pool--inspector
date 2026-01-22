@@ -101,9 +101,10 @@ export class LACountyScraperAdapter extends BaseAdapter {
     // LA County uses JavaScript pagination: goPageIndex(n) where n is 0-indexed
     // We need to click through pages or call the JS function directly
     await this.page.evaluate((idx) => {
-      // @ts-ignore - goPageIndex is a global function on the page
-      if (typeof goPageIndex === "function") {
-        goPageIndex(idx);
+      // goPageIndex is a global function on the page
+      const win = window as unknown as { goPageIndex?: (n: number) => void };
+      if (typeof win.goPageIndex === "function") {
+        win.goPageIndex(idx);
       }
     }, pageIndex);
 

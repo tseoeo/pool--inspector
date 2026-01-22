@@ -58,7 +58,7 @@ export interface CanonicalRecord {
 
 export interface IngestionOptions {
   sourceId: string;
-  syncType: "BACKFILL" | "INCREMENTAL" | "MANUAL";
+  syncType: "BACKFILL" | "INCREMENTAL" | "MANUAL" | "RESUME";
   maxRecords?: number;
 }
 
