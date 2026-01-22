@@ -22,6 +22,12 @@ interface GoogleHours {
   openNow?: boolean;
 }
 
+interface GooglePhoto {
+  name: string;
+  width: number;
+  height: number;
+}
+
 async function getFacility(slug: string) {
   return prisma.facility.findUnique({
     where: { slug },
@@ -199,6 +205,36 @@ export default async function FacilityPage({ params }: PageProps) {
             </div>
           )}
         </section>
+
+        {/* Photo Gallery */}
+        {facility.googlePhotos && Array.isArray(facility.googlePhotos) && (facility.googlePhotos as unknown as GooglePhoto[]).length > 0 && (
+          <section className="mb-8">
+            <h2 className="text-base font-semibold mb-4">Photos</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+              {(facility.googlePhotos as unknown as GooglePhoto[]).slice(0, 4).map((photo, i) => (
+                <div
+                  key={i}
+                  className={`relative overflow-hidden rounded-lg bg-[var(--background-subtle)] ${
+                    i === 0 ? 'col-span-2 row-span-2 aspect-[4/3]' : 'aspect-square'
+                  }`}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`/api/photos?ref=${encodeURIComponent(photo.name)}&maxWidth=${i === 0 ? '800' : '400'}&maxHeight=${i === 0 ? '600' : '400'}`}
+                    alt={`${facility.displayName} photo ${i + 1}`}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    loading={i === 0 ? "eager" : "lazy"}
+                  />
+                </div>
+              ))}
+            </div>
+            {(facility.googlePhotos as unknown as GooglePhoto[]).length > 4 && (
+              <p className="text-xs text-[var(--foreground-muted)] mt-2">
+                +{(facility.googlePhotos as unknown as GooglePhoto[]).length - 4} more photos available on Google
+              </p>
+            )}
+          </section>
+        )}
 
         {/* Google Places Info */}
         {facility.googleEnrichedAt && (
